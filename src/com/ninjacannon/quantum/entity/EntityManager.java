@@ -36,11 +36,17 @@ public final class EntityManager
         }
         return null;
     }
-    
+      
     public synchronized void update(GameContainer gc, StateBasedGame sbg, int delta)
     {
+        
         for(int i = 0; i < entities.size(); i++){
             entities.get(i).update(gc, sbg, delta);
+            if(entities.get(i).collisionComponent != null){
+                for(int j = i; j < entities.size(); j++){
+                    entities.get(i).collisionComponent.collided(entities.get(j));
+                }
+            }
         }
     }
     

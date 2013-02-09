@@ -4,6 +4,7 @@ package com.ninjacannon.quantum;
 import com.ninjacannon.quantum.entity.Entity;
 import com.ninjacannon.quantum.entity.EntityManager;
 import com.ninjacannon.quantum.entity.component.*;
+import com.ninjacannon.quantum.entity.component.movement.KeyboardMovementComponent;
 import com.ninjacannon.quantum.entity.component.render.*;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -36,13 +37,14 @@ public class GamePlayState extends BasicGameState
     public void init(GameContainer gc, StateBasedGame sbg) 
             throws SlickException
     {
-
         background = ImageFactory.background;
         player = new Entity("Player");
         player.AddComponent(new ImageRenderComponent("Render", ImageFactory.ship));
         player.AddComponent(new KeyboardMovementComponent("Controls"));
         player.AddComponent(new GunComponent("Gun"));
         player.setPosition(new Vector2f(0,0));
+        player.setHeight(ImageFactory.ship.getHeight());
+        player.setWidth(ImageFactory.ship.getWidth());
         player.setScale(.5f);
         EntityManager.manager.addEntity(player);
     }

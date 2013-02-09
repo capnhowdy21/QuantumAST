@@ -1,6 +1,7 @@
 
 package com.ninjacannon.quantum.entity;
 
+import com.ninjacannon.quantum.entity.component.CollisionComponent;
 import com.ninjacannon.quantum.entity.component.Component;
 import com.ninjacannon.quantum.entity.component.render.RenderComponent;
 import java.util.ArrayList;
@@ -14,11 +15,14 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class Entity 
 {
-    private String id;
-    private Vector2f position;
-    private float scale;
-    private float rotation;
+    protected String id;
+    protected Vector2f position;
+    protected int width;
+    protected int height;
+    protected float scale;
+    protected float rotation;
     
+    CollisionComponent collisionComponent = null;
     RenderComponent renderComponent = null;
     ArrayList<Component> components = null;
     
@@ -29,6 +33,8 @@ public class Entity
         components = new ArrayList<Component>();
         
         position = new Vector2f(0,0);
+        width = 0;
+        height = 0;
         scale = 1;
         rotation = 0;
     }
@@ -73,6 +79,8 @@ public class Entity
     
     public void setScale(float scale){
         this.scale = scale;
+        width *= scale;
+        height *= scale;
     }
     
     public float getRotation(){
@@ -81,6 +89,22 @@ public class Entity
     
     public void setRotation(float rotation){
         this.rotation = rotation;
+    }
+    
+    public int getWidth(){
+        return width;
+    }
+    
+    public void setWidth(int width){
+        this.width = width;
+    }
+    
+    public int getHeight(){
+        return height;
+    }
+    
+    public void setHeight(int height){
+        this.height = height;
     }
     
     public String getId(){
