@@ -7,7 +7,7 @@ import org.newdawn.slick.SlickException;
 /**
  * @author Dan Cannon
  */
-public class ImageFactory{
+public class ImageLibrary{
     
     public static Image ship = load("images/player.png");
     public static Image bullet = load("images/bullet.png");
@@ -15,6 +15,8 @@ public class ImageFactory{
     public static Image start = load("images/start.png");
     public static Image menu = load("images/menu.png");
     public static Image background = load("images/background.png");
+    public static Image enemies = load("images/enemy.gif");
+    public static Image enemy = cut(enemies, 0, 0, 64, 64);
     
     public static Image load(String url){
         try{
@@ -24,5 +26,10 @@ public class ImageFactory{
             System.exit(0);
         }
         return null;
+    }
+    
+    public static Image cut(Image image, int x, int y, int width, int height)
+    {
+        return image.getSubImage(x, y, width, height);
     }
 }

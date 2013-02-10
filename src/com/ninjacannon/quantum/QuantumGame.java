@@ -31,7 +31,6 @@ public class QuantumGame extends StateBasedGame
     public static void main(String[] args) throws SlickException
     {
       AppGameContainer app = new AppGameContainer(new QuantumGame());
-      
       app.setMaximumLogicUpdateInterval(20);
       app.setMinimumLogicUpdateInterval(20);
       app.setDisplayMode(1280, 720, true);

@@ -1,7 +1,7 @@
 
 package com.ninjacannon.quantum;
 
-import com.ninjacannon.quantum.entity.component.render.ImageFactory;
+import com.ninjacannon.quantum.entity.component.render.ImageLibrary;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -41,9 +41,9 @@ public class MainMenuState extends BasicGameState
     public void init(GameContainer gc, StateBasedGame sbg) 
             throws SlickException
     {   
-        background = ImageFactory.menu;
-        startOption = ImageFactory.start;
-        exitOption = ImageFactory.exit;
+        background = ImageLibrary.menu;
+        startOption = ImageLibrary.start;
+        exitOption = ImageLibrary.exit;
     }
     
     @Override

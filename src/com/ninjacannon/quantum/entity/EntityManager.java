@@ -39,15 +39,21 @@ public final class EntityManager
       
     public synchronized void update(GameContainer gc, StateBasedGame sbg, int delta)
     {
-        
+        Entity eI;
+        Entity eJ;
         for(int i = 0; i < entities.size(); i++){
-            entities.get(i).update(gc, sbg, delta);
-            if(entities.get(i).collisionComponent != null){
-                for(int j = i; j < entities.size(); j++){
-                    entities.get(i).collisionComponent.collided(entities.get(j));
+            eI = entities.get(i);
+            eI.update(gc, sbg, delta);
+            if(eI.collisionComponent != null){
+                for(int j = 0; j < entities.size(); j++){
+                        eJ = entities.get(j);
+                        if(eJ.collisionComponent != null){
+                            eI.collisionComponent.collides(eJ);
+                        }
                 }
             }
         }
+
     }
     
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g)

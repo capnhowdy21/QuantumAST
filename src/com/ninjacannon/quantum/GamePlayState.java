@@ -3,6 +3,7 @@ package com.ninjacannon.quantum;
 
 import com.ninjacannon.quantum.entity.Entity;
 import com.ninjacannon.quantum.entity.EntityManager;
+import com.ninjacannon.quantum.entity.SceneManager;
 import com.ninjacannon.quantum.entity.component.*;
 import com.ninjacannon.quantum.entity.component.movement.KeyboardMovementComponent;
 import com.ninjacannon.quantum.entity.component.render.*;
@@ -23,6 +24,7 @@ public class GamePlayState extends BasicGameState
     float xOffset;
     Image background = null;
     Entity player = null;
+    SceneManager scene = null;
     
     GamePlayState(int stateID){
         this.stateID = stateID;
@@ -37,16 +39,17 @@ public class GamePlayState extends BasicGameState
     public void init(GameContainer gc, StateBasedGame sbg) 
             throws SlickException
     {
-        background = ImageFactory.background;
+        background = ImageLibrary.background;
         player = new Entity("Player");
-        player.AddComponent(new ImageRenderComponent("Render", ImageFactory.ship));
+        player.AddComponent(new ImageRenderComponent("Render", ImageLibrary.ship));
         player.AddComponent(new KeyboardMovementComponent("Controls"));
         player.AddComponent(new GunComponent("Gun"));
         player.setPosition(new Vector2f(0,0));
-        player.setHeight(ImageFactory.ship.getHeight());
-        player.setWidth(ImageFactory.ship.getWidth());
+        player.setHeight(ImageLibrary.ship.getHeight());
+        player.setWidth(ImageLibrary.ship.getWidth());
         player.setScale(.5f);
         EntityManager.manager.addEntity(player);
+        scene = new SceneManager();
     }
     
     @Override
@@ -67,5 +70,6 @@ public class GamePlayState extends BasicGameState
             xOffset = 0;
         }
         EntityManager.manager.update(gc, sbg, delta);
+        scene.update(gc, sbg, delta);
     }
 }

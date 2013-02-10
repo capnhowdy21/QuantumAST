@@ -17,7 +17,7 @@ public class HorizontalMovementComponent extends Component
     public HorizontalMovementComponent(String id)
     {
         super(id);
-        this.dx = -10;
+        this.dx = -.5f;
     }
     
     public HorizontalMovementComponent(String id, float dx)
@@ -33,12 +33,16 @@ public class HorizontalMovementComponent extends Component
     @Override
     public void update(GameContainer gc, StateBasedGame sb, int delta)
     {
-        owner.setPosition(owner.getPosition().add(new Vector2f(dx,0f)));
-        if((dx < 0)&& (owner.getPosition().x + owner.getWidth() < 0)){
+        Vector2f pos = owner.getPosition().copy();
+        pos.x += (dx * delta);
+        System.out.println();
+        if((dx < 0)&& (pos.x + owner.getWidth() < 0)){
             EntityManager.manager.removeEntity(owner);
-        } else if((dx > 0)&& (owner.getPosition().x > gc.getWidth())){
+        } else if((dx > 0)&& (pos.x > gc.getWidth())){
             EntityManager.manager.removeEntity(owner);
         }
+        
+        owner.setPosition(pos);
     }
     
     

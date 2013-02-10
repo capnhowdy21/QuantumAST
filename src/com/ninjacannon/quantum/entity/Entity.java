@@ -1,7 +1,7 @@
 
 package com.ninjacannon.quantum.entity;
 
-import com.ninjacannon.quantum.entity.component.CollisionComponent;
+import com.ninjacannon.quantum.entity.component.collision.CollisionComponent;
 import com.ninjacannon.quantum.entity.component.Component;
 import com.ninjacannon.quantum.entity.component.render.RenderComponent;
 import java.util.ArrayList;
@@ -49,6 +49,8 @@ public class Entity
     {
         if(RenderComponent.class.isInstance(component)){
             renderComponent = (RenderComponent)component;
+        } else if (CollisionComponent.class.isInstance(component)){
+            collisionComponent = (CollisionComponent)component;
         }
         
         component.setOwnerEntity(this);
@@ -110,7 +112,11 @@ public class Entity
     public String getId(){
         return id;
     }
-
+    
+    public CollisionComponent getCollision(){
+        return collisionComponent;
+    }
+    
     public void update(GameContainer gc, StateBasedGame sbg, int delta)
     {
         for(Component component : components){
