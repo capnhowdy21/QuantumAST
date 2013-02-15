@@ -90,16 +90,16 @@ public class MainMenuState extends BasicGameState
             if(startGameScale > 1.0f){
                 startGameScale -= scaleStep * delta;
             }
-  
-            if ( input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) ){
-                gc.exit();
-            }
         }
   
         if(insideExit)
         {
             if(exitScale < 1.05f){
                 exitScale +=  scaleStep * delta;
+            }
+            
+            if ( input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) ){
+                gc.exit();
             }
         }else{
             if(exitScale > 1.0f){

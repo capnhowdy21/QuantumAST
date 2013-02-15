@@ -37,7 +37,6 @@ public class QuantumGame extends StateBasedGame
       app.setResizable(false);
       app.setShowFPS(true);
       app.start();
-      
     }
     
     @Override

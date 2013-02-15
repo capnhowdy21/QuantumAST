@@ -12,8 +12,8 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class KeyboardMovementComponent extends Component
 {
-    float dx;
-    float dy;
+    private float dx;
+    private float dy;
         
     public KeyboardMovementComponent(String id)
     {
