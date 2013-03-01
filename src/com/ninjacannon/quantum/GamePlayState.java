@@ -10,6 +10,7 @@ import com.ninjacannon.quantum.entity.component.render.*;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.BasicGameState;
@@ -20,11 +21,11 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class GamePlayState extends BasicGameState
 {
-    int stateID = -1;
-    float xOffset;
-    Image background = null;
-    Entity player = null;
-    SceneManager scene = null;
+    private int stateID = -1;
+    private float xOffset;
+    private Image background = null;
+    private Entity player = null;
+    private SceneManager scene = null;
     
     GamePlayState(int stateID){
         this.stateID = stateID;
@@ -65,6 +66,12 @@ public class GamePlayState extends BasicGameState
     public void update(GameContainer gc, StateBasedGame sbg, int delta)
             throws SlickException
     {
+        Input input = gc.getInput();
+        
+        if(input.isKeyDown(Input.KEY_ESCAPE)){
+            gc.exit();
+        }
+        
         xOffset -= .2 * delta;
         if(xOffset <= 0 - background.getWidth()){
             xOffset = 0;

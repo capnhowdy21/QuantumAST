@@ -43,17 +43,20 @@ public final class EntityManager
         Entity eJ;
         for(int i = 0; i < entities.size(); i++){
             eI = entities.get(i);
-            eI.update(gc, sbg, delta);
-            if(eI.collisionComponent != null){
-                for(int j = 0; j < entities.size(); j++){
-                        eJ = entities.get(j);
-                        if(eJ.collisionComponent != null){
-                            eI.collisionComponent.collides(eJ);
-                        }
+            if(!eI.isAlive()){
+                this.removeEntity(eI);
+            } else {
+                eI.update(gc, sbg, delta);
+                if(eI.collisionComponent != null){
+                    for(int j = 0; j < entities.size(); j++){
+                            eJ = entities.get(j);
+                            if(eJ.collisionComponent != null){
+                                eI.collisionComponent.collides(eJ);
+                            }
+                    }
                 }
             }
         }
-
     }
     
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g)

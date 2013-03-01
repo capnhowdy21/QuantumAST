@@ -53,9 +53,9 @@ public class SineMovementComponent extends Component
         pos.y = midY + (float)(Math.sin(pos.x / interval) * peak);
         
         if((dx < 0)&& (pos.x + owner.getWidth() < 0)){
-            EntityManager.manager.removeEntity(owner);
+            owner.setAlive(false);
         } else if((dx > 0)&& (pos.x > gc.getWidth())){
-            EntityManager.manager.removeEntity(owner);
+            owner.setAlive(false);
         }
         
         owner.setPosition(pos);

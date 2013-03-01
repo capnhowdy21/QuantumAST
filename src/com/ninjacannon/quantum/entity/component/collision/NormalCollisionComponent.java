@@ -15,7 +15,7 @@ public class NormalCollisionComponent extends CollisionComponent
     @Override
     public void collide()
     {
-        EntityManager.manager.removeEntity(owner);
+        owner.setAlive(false);
     }
 
 }

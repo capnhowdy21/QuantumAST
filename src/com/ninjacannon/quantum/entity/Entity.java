@@ -21,10 +21,11 @@ public class Entity
     protected int height;
     protected float scale;
     protected float rotation;
+    protected boolean alive;
     
-    CollisionComponent collisionComponent = null;
-    RenderComponent renderComponent = null;
-    ArrayList<Component> components = null;
+    protected CollisionComponent collisionComponent = null;
+    protected RenderComponent renderComponent = null;
+    private ArrayList<Component> components = null;
     
     public Entity(String id)
     {
@@ -37,6 +38,7 @@ public class Entity
         height = 0;
         scale = 1;
         rotation = 0;
+        alive = true;
     }
     
     public Entity(String id, Vector2f pos)
@@ -65,6 +67,15 @@ public class Entity
             }
         }
         return null;
+    }
+    
+    public void RemoveComponent(String id)
+    {
+        for(Component component : components){
+            if(component.getID().equalsIgnoreCase(id)){
+                components.remove(component);
+            }
+        }
     }
     
     public Vector2f getPosition(){
@@ -111,6 +122,14 @@ public class Entity
     
     public String getId(){
         return id;
+    }
+    
+    public boolean isAlive(){
+        return alive;
+    }
+    
+    public void setAlive(boolean alive){
+        this.alive = alive;
     }
     
     public CollisionComponent getCollision(){

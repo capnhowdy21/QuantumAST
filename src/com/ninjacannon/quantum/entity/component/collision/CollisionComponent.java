@@ -35,6 +35,7 @@ public abstract class CollisionComponent extends Component
         Vector2f them = e.getPosition();
         if(me.x > them.x + e.getWidth() || me.x + owner.getWidth() < them.x ||
              me.y > them.y+e.getHeight() || me.y + owner.getWidth() < them.y){
+            //do nothing
         } else if(!owner.getId().equalsIgnoreCase(e.getId())) {
             setCollision(e.getId());
             e.getCollision().setCollision(owner.getId());
