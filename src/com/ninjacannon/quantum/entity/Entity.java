@@ -1,8 +1,8 @@
 
 package com.ninjacannon.quantum.entity;
 
-import com.ninjacannon.quantum.entity.component.collision.CollisionComponent;
 import com.ninjacannon.quantum.entity.component.Component;
+import com.ninjacannon.quantum.entity.component.collision.CollisionComponent;
 import com.ninjacannon.quantum.entity.component.render.RenderComponent;
 import java.util.ArrayList;
 import org.newdawn.slick.GameContainer;
@@ -15,7 +15,8 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class Entity 
 {
-    protected String id;
+    public enum EntityType{PLAYER, FRIENDLY, BULLET, ENEMY, EFFECT};
+    protected EntityType id;
     protected Vector2f position;
     protected int width;
     protected int height;
@@ -27,7 +28,7 @@ public class Entity
     protected RenderComponent renderComponent = null;
     private ArrayList<Component> components = null;
     
-    public Entity(String id)
+    public Entity(EntityType id)
     {
         this.id = id;
         
@@ -41,7 +42,7 @@ public class Entity
         alive = true;
     }
     
-    public Entity(String id, Vector2f pos)
+    public Entity(EntityType id, Vector2f pos)
     {
         this(id);
         position = pos;
@@ -79,7 +80,7 @@ public class Entity
     }
     
     public Vector2f getPosition(){
-        return position;
+        return position.copy();
     }
     
     public void setPosition(Vector2f position){
@@ -92,8 +93,8 @@ public class Entity
     
     public void setScale(float scale){
         this.scale = scale;
-        width *= scale;
-        height *= scale;
+        width = (int)(scale * width);
+        height = (int)(scale * height);
     }
     
     public float getRotation(){
@@ -120,7 +121,7 @@ public class Entity
         this.height = height;
     }
     
-    public String getId(){
+    public EntityType getId(){
         return id;
     }
     

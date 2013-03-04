@@ -1,6 +1,7 @@
 
 package com.ninjacannon.quantum.entity;
 
+import com.ninjacannon.quantum.entity.Entity.EntityType;
 import java.util.ArrayList;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -13,7 +14,7 @@ public final class EntityManager
 {
     
     public final static EntityManager manager = new EntityManager();
-    private ArrayList<Entity> entities;
+    private volatile ArrayList<Entity> entities;
     
     private EntityManager()
     {
@@ -28,9 +29,9 @@ public final class EntityManager
         entities.remove(e);
     }
     
-    public Entity getEntity(String id){
+    public Entity getEntity(EntityType id){
         for(int i = 0; i < entities.size(); i++){
-            if(entities.get(i).getId().equalsIgnoreCase(id)){
+            if(entities.get(i).getId() == id){
                 return entities.get(i);
             }
         }
@@ -43,10 +44,10 @@ public final class EntityManager
         Entity eJ;
         for(int i = 0; i < entities.size(); i++){
             eI = entities.get(i);
+            eI.update(gc, sbg, delta);
             if(!eI.isAlive()){
                 this.removeEntity(eI);
             } else {
-                eI.update(gc, sbg, delta);
                 if(eI.collisionComponent != null){
                     for(int j = 0; j < entities.size(); j++){
                             eJ = entities.get(j);
@@ -64,5 +65,10 @@ public final class EntityManager
         for(int i = 0; i < entities.size(); i++){
             entities.get(i).render(gc, sbg, g);
         }
+    }
+    
+    public void cleanUp()
+    {
+        entities.clear();
     }
 }

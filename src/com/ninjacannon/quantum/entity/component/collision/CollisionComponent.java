@@ -2,6 +2,7 @@
 package com.ninjacannon.quantum.entity.component.collision;
 
 import com.ninjacannon.quantum.entity.Entity;
+import com.ninjacannon.quantum.entity.Entity.EntityType;
 import com.ninjacannon.quantum.entity.component.Component;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.geom.Vector2f;
@@ -13,7 +14,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public abstract class CollisionComponent extends Component
 {
     public boolean collided;
-    private String eId;
+    protected EntityType eId;
     
     public CollisionComponent(String id)
     {
@@ -36,13 +37,12 @@ public abstract class CollisionComponent extends Component
         if(me.x > them.x + e.getWidth() || me.x + owner.getWidth() < them.x ||
              me.y > them.y+e.getHeight() || me.y + owner.getWidth() < them.y){
             //do nothing
-        } else if(!owner.getId().equalsIgnoreCase(e.getId())) {
+        } else if(owner.getId() != e.getId()) {
             setCollision(e.getId());
-            e.getCollision().setCollision(owner.getId());
         }
     }
     
-    public void setCollision(String eId){
+    public void setCollision(EntityType id){
         collided = true;
         this.eId = id;
     }

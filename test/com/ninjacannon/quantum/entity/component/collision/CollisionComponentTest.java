@@ -4,6 +4,7 @@
 package com.ninjacannon.quantum.entity.component.collision;
 
 import com.ninjacannon.quantum.entity.Entity;
+import com.ninjacannon.quantum.entity.Entity.EntityType;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.newdawn.slick.geom.Vector2f;
@@ -27,9 +28,9 @@ public class CollisionComponentTest
     @Before
     public void setUp(){
         comp = new NormalCollisionComponent("Collision");
-        owner = new Entity("Owner");
+        owner = new Entity(EntityType.FRIENDLY);
         owner.AddComponent(comp);
-        them = new Entity("Them");
+        them = new Entity(EntityType.ENEMY);
     }
     
     @Test

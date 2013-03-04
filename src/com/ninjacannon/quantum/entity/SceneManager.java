@@ -1,7 +1,7 @@
 
 package com.ninjacannon.quantum.entity;
 
-import com.ninjacannon.quantum.entity.component.collision.NormalCollisionComponent;
+import com.ninjacannon.quantum.entity.component.collision.ExplosionCollisionComponent;
 import com.ninjacannon.quantum.entity.component.movement.HorizontalMovementComponent;
 import com.ninjacannon.quantum.entity.component.movement.SineMovementComponent;
 import com.ninjacannon.quantum.entity.component.render.*;
@@ -45,9 +45,9 @@ public class SceneManager
     private void SpawnSineWave(int width, int height)
     {   
         for(int i = 0; i < 9; i++){
-            mob = new Entity("Enemy");
+            mob = new Entity(Entity.EntityType.ENEMY);
             mob.AddComponent(new ImageRenderComponent("Render", ImageLibrary.enemy));
-            mob.AddComponent(new NormalCollisionComponent("Collision"));
+            mob.AddComponent(new ExplosionCollisionComponent("Collision"));
             mob.setHeight(64);
             mob.setWidth(64);
             mob.setScale(.75f);
@@ -63,9 +63,9 @@ public class SceneManager
     private void SpawnStraightWave(int width, int height)
     {   
         for(int i = 0; i < 9; i++){
-            mob = new Entity("Enemy");
+            mob = new Entity(Entity.EntityType.ENEMY);
             mob.AddComponent(new ImageRenderComponent("Render", ImageLibrary.enemy));
-            mob.AddComponent(new NormalCollisionComponent("Collision"));
+            mob.AddComponent(new ExplosionCollisionComponent("Collision"));
             mob.setHeight(64);
             mob.setWidth(64);
             mob.setScale(.75f);

@@ -20,9 +20,6 @@ public class QuantumGame extends StateBasedGame
     public QuantumGame()
     {
         super("Quantum AST");
-        this.addState(new MainMenuState(MAINMENUSTATE));
-        this.addState(new GamePlayState(GAMEPLAYSTATE));
-        this.enterState(MAINMENUSTATE);
     }
     
     /**
@@ -38,11 +35,11 @@ public class QuantumGame extends StateBasedGame
       app.setShowFPS(true);
       app.start();
     }
-    
+
     @Override
-    public void initStatesList(GameContainer gameContainer) throws SlickException
+    public void initStatesList(GameContainer gc) throws SlickException
     {
-        this.getState(MAINMENUSTATE).init(gameContainer, this);
-        this.getState(GAMEPLAYSTATE).init(gameContainer, this);
+        this.addState(new MainMenuState(MAINMENUSTATE));
+        this.addState(new GamePlayState(GAMEPLAYSTATE));
     }
 }

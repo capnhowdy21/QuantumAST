@@ -11,11 +11,11 @@ import org.newdawn.slick.state.StateBasedGame;
 /**
  * @author Dan Cannon
  */
-public class AnimRenderComponent extends RenderComponent
+public class LoopAnimRenderComponent extends RenderComponent
 {
     Animation anim;
     
-    public AnimRenderComponent(String id, SpriteSheet images, int w, int h, int length)
+    public LoopAnimRenderComponent(String id, SpriteSheet images, int w, int h, int length)
     {
         super(id);
         anim = new Animation();
@@ -25,7 +25,7 @@ public class AnimRenderComponent extends RenderComponent
             }
         }
         anim.setAutoUpdate(false);
-        anim.setLooping(false);
+        anim.setLooping(true);
     }
     
     @Override
@@ -40,8 +40,5 @@ public class AnimRenderComponent extends RenderComponent
     public void update(GameContainer gc, StateBasedGame sbg, int delta)
     {
         anim.update(delta);
-        if(anim.isStopped()){
-            owner.setAlive(false);
-        }
     }
 }

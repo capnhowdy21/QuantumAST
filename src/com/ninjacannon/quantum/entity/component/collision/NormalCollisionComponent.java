@@ -1,7 +1,7 @@
 
 package com.ninjacannon.quantum.entity.component.collision;
 
-import com.ninjacannon.quantum.entity.EntityManager;
+import com.ninjacannon.quantum.entity.Entity.EntityType;
 
 /**
  * @author Dan Cannon
@@ -15,7 +15,15 @@ public class NormalCollisionComponent extends CollisionComponent
     @Override
     public void collide()
     {
-        owner.setAlive(false);
+        if(owner.getId() == EntityType.FRIENDLY && eId == EntityType.PLAYER){
+            //do nothing.
+        } else if(owner.getId() != eId){
+            owner.setAlive(false);
+            System.out.println("Dead" + eId.toString());
+        }
+        
+        eId = null;
+        collided = false;
     }
 
 }

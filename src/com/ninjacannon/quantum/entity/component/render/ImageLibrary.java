@@ -10,15 +10,16 @@ import org.newdawn.slick.SpriteSheet;
  */
 public class ImageLibrary{
     
-    public static Image ship = load("images/player.png");
-    public static Image bullet = load("images/bullet.png");
-    public static Image exit = load("images/exit.png");
-    public static Image start = load("images/start.png");
-    public static Image menu = load("images/menu.png");
-    public static Image background = load("images/background.png");
-    public static Image enemies = load("images/enemy.gif");
-    public static Image enemy = cut(enemies, 0, 0, 64, 64);
-    public static SpriteSheet explosion = loadSheet("images/explosion.png", 64, 64);
+    public final static Image ship = load("images/player.png");
+    public final static Image bullet = load("images/bullet.png");
+    public final static Image exit = load("images/exit.png");
+    public final static Image start = load("images/start.png");
+    public final static Image menu = load("images/menu.png");
+    public final static Image background = load("images/background.png");
+    public final static Image enemies = load("images/enemy.gif");
+    public final static Image enemy = cut(enemies, 0, 0, 64, 64);
+    public final static SpriteSheet shield = loadSheet("images/shield.png", 128, 128);
+    public final static SpriteSheet explosion = loadSheet("images/explosion.png", 64, 64);
     
     public static Image load(String url){
         try{
