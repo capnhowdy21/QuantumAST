@@ -3,11 +3,15 @@ package com.ninjacannon.quantum;
 
 import com.ninjacannon.quantum.entity.Entity;
 import com.ninjacannon.quantum.entity.EntityManager;
-import com.ninjacannon.quantum.entity.component.PlayerGunComponent;
+import com.ninjacannon.quantum.entity.component.GunComponent;
 import com.ninjacannon.quantum.entity.component.collision.ShieldComponent;
 import com.ninjacannon.quantum.entity.component.movement.KeyboardMovementComponent;
 import com.ninjacannon.quantum.entity.component.render.ImageLibrary;
 import com.ninjacannon.quantum.entity.component.render.ShieldRenderComponent;
+import com.ninjacannon.quantum.entity.component.upgrades.MineUpgradeComponent;
+import com.ninjacannon.quantum.entity.component.upgrades.NukeUpgradeComponent;
+import com.ninjacannon.quantum.entity.component.upgrades.TurretUpgradeComponent;
+import com.ninjacannon.quantum.entity.component.upgrades.UpgradeComponent;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Vector2f;
@@ -20,12 +24,17 @@ public class Player
 {
     private Entity ship;
     private KeyboardMovementComponent move;
-    private PlayerGunComponent gun;
+    private GunComponent gun;
     private ShieldRenderComponent render;
     private ShieldComponent shield;
+    private UpgradeComponent upgrade1;
+    private UpgradeComponent upgrade2;
+    private UpgradeComponent upgrade3;
     private int respawnTimer = 1200;
     private int shieldStr = 10;
     private int lives = 3;
+    private int maxEnergy = 100;
+    private int energy = 0;
     public boolean alive;
     
     public Player()
@@ -34,17 +43,23 @@ public class Player
         ship = new Entity(Entity.EntityType.PLAYER);
         ship.setHeight(ImageLibrary.ship.getHeight());
         ship.setWidth(ImageLibrary.ship.getWidth());
-        ship.setScale(.5f);
+        ship.setScale(1f);
         
-        gun = new PlayerGunComponent("Gun");
+        gun = new GunComponent("Gun");
         move = new KeyboardMovementComponent("Movement");
         render = new ShieldRenderComponent("Render", ImageLibrary.ship, ImageLibrary.shield, 3, 1, 50);
         shield = new ShieldComponent("Shield", shieldStr);
+        upgrade1 = new MineUpgradeComponent("Upgrade");
+        upgrade2 = new TurretUpgradeComponent("Upgrade");
+        upgrade3 = new NukeUpgradeComponent("Upgrade");
         
         ship.AddComponent(gun);
         ship.AddComponent(move);
         ship.AddComponent(render);
         ship.AddComponent(shield);
+        ship.AddComponent(upgrade1);
+        ship.AddComponent(upgrade2);
+        ship.AddComponent(upgrade3);
     }
     
    
@@ -83,6 +98,17 @@ public class Player
                 shield.setShielded(false);
                 render.setRenderShield(false);
             }
+            
+            if(input.isKeyDown(Input.KEY_1)){
+                upgrade1.activate();
+            }
+            if(input.isKeyDown(Input.KEY_2)){
+                upgrade2.activate();
+            }
+            if(input.isKeyDown(Input.KEY_3)){
+                upgrade3.activate();
+            }
+            
         } else {
             respawnTimer -= delta;
             if(respawnTimer <= 0){
@@ -115,6 +141,7 @@ public class Player
         ship.setAlive(true);
         respawnTimer = 1200;
         lives = 3;
+        energy = 0;
         shield.reset();
         gun.reset();
         move.reset();

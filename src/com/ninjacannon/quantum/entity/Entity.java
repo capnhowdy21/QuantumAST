@@ -87,6 +87,14 @@ public class Entity
         this.position = position;
     }
     
+    public void setPostition(float x, float y){
+        this.position = new Vector2f(x, y);
+    }
+    
+    public void setPosition(int x, int y){
+        this.position = new Vector2f(x, y);
+    }
+    
     public float getScale(){
         return scale;
     }

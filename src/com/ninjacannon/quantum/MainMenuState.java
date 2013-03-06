@@ -1,6 +1,7 @@
 
 package com.ninjacannon.quantum;
 
+import com.ninjacannon.quantum.entity.SoundLibrary;
 import com.ninjacannon.quantum.entity.component.render.ImageLibrary;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -44,6 +45,7 @@ public class MainMenuState extends BasicGameState
         background = ImageLibrary.menu;
         startOption = ImageLibrary.start;
         exitOption = ImageLibrary.exit;
+        //SoundLibrary.MUSIC_THEME.loop();
     }
     
     @Override
@@ -59,6 +61,7 @@ public class MainMenuState extends BasicGameState
     public void update(GameContainer gc, StateBasedGame sbg, int delta)
             throws SlickException
     {
+        gc.setMouseGrabbed(false);
         Input input = gc.getInput();
   
         int mouseX = input.getMouseX();

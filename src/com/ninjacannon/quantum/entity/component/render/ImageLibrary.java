@@ -15,11 +15,15 @@ public class ImageLibrary{
     public final static Image exit = load("images/exit.png");
     public final static Image start = load("images/start.png");
     public final static Image menu = load("images/menu.png");
-    public final static Image background = load("images/background.png");
+    public final static Image background1 = load("images/Parallax100.png");
+    public final static Image background2 = load("images/Parallax80.png");
+    public final static Image background3 = load("images/Parallax60.png");
     public final static Image enemies = load("images/enemy.gif");
     public final static Image enemy = cut(enemies, 0, 0, 64, 64);
-    public final static SpriteSheet shield = loadSheet("images/shield.png", 128, 128);
+    public final static Image turret = cut(enemies, 37, 66, 32, 32);
+    public final static SpriteSheet shield = loadSheet("images/shield.png", 64, 64);
     public final static SpriteSheet explosion = loadSheet("images/explosion.png", 64, 64);
+    public final static SpriteSheet mine = loadSheet("images/mine.png", 16, 16);
     
     public static Image load(String url){
         try{
