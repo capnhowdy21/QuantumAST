@@ -13,7 +13,7 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class ShieldRenderComponent extends RenderComponent
 {
-    private LoopAnimRenderComponent shield;
+    private AnimRenderComponent shield;
     private ImageRenderComponent ship;
     public boolean renderShield;
     
@@ -21,7 +21,7 @@ public class ShieldRenderComponent extends RenderComponent
     {
         super(id);
         ship  = new ImageRenderComponent(id, img);
-        shield = new LoopAnimRenderComponent(id, ss, w, h, l);
+        shield = new AnimRenderComponent(id, ss, w, h, l, false);
         shield.setOwnerEntity(owner);
         ship.setOwnerEntity(owner);
         renderShield = false;
@@ -53,5 +53,11 @@ public class ShieldRenderComponent extends RenderComponent
     {
         ship.update(gc, sb, delta);
         shield.update(gc, sb, delta);
+    }
+
+    @Override
+    public void reset()
+    {
+        renderShield = false;
     }
 }

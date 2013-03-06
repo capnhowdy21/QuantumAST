@@ -5,8 +5,9 @@ import com.ninjacannon.quantum.entity.Entity;
 import com.ninjacannon.quantum.entity.EntityManager;
 import com.ninjacannon.quantum.entity.component.TimedComponent;
 import com.ninjacannon.quantum.entity.component.collision.NormalCollisionComponent;
+import com.ninjacannon.quantum.entity.component.render.AnimRenderComponent;
 import com.ninjacannon.quantum.entity.component.render.ImageLibrary;
-import com.ninjacannon.quantum.entity.component.render.LoopAnimRenderComponent;
+import java.util.ArrayList;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -20,6 +21,7 @@ public class MineUpgradeComponent extends UpgradeComponent
     private int lastFired;
     private int firedInterval;
     private Entity mine;
+    private ArrayList<Entity> mines;
     
     public MineUpgradeComponent(String id){
         super(id);
@@ -27,6 +29,11 @@ public class MineUpgradeComponent extends UpgradeComponent
         lastFired = 0;
         firedInterval = 250;
         energyCost = 10;
+        mines = new ArrayList<Entity>();
+    }
+    
+    public void setFiredInterval(int interval){
+        this.firedInterval = interval;
     }
     
     @Override
@@ -34,7 +41,7 @@ public class MineUpgradeComponent extends UpgradeComponent
     {
         fired = true;
     }
-
+    
     @Override
     public void update(GameContainer gc, StateBasedGame sb, int delta)
     {
@@ -42,22 +49,44 @@ public class MineUpgradeComponent extends UpgradeComponent
         if(fired && lastFired >= firedInterval){
             lastFired = 0;
             mine = new Entity(Entity.EntityType.FRIENDLY);
-            mine.AddComponent(new LoopAnimRenderComponent("Render", ImageLibrary.mine, 4, 1, 100));
+            mine.AddComponent(new AnimRenderComponent("Render", ImageLibrary.mine, 4, 1, 100, true));
             mine.AddComponent(new TimedComponent("Timer", 12000));
             mine.setPosition(owner.getPosition());
             mine.setHeight(32);
             mine.setWidth(32);
             mine.AddComponent(new NormalCollisionComponent("Collision"));
             EntityManager.manager.addEntity(mine);
+            mines.add(mine);
         }
+        
         fired = false;
+        
+        for(int i = 0; i < mines.size(); i++){
+            if(!mines.get(i).isAlive()){
+                mines.remove(i);
+            }
+        }
+        
+        if(mines.size() > 10){
+            mines.remove(0);
+        }
     }
     
     @Override
     public void reset()
     {
+        deactivate();
+    }
+    
+    @Override
+    public void deactivate()
+    {
+        for(int i = 0; i < mines.size(); i++){
+            mines.get(i).setAlive(false);
+        }
         fired = false;
-        mine = null;
         lastFired = 0;
+        mine = null;
+        mines.clear();
     }
 }

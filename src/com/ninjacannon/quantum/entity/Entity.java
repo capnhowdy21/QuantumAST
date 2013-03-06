@@ -16,7 +16,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public class Entity 
 {
     public enum EntityType{PLAYER, FRIENDLY, BULLET, ENEMY, EFFECT};
-    protected EntityType id;
+    protected EntityType type;
     protected Vector2f position;
     protected int width;
     protected int height;
@@ -28,9 +28,9 @@ public class Entity
     protected RenderComponent renderComponent = null;
     private ArrayList<Component> components = null;
     
-    public Entity(EntityType id)
+    public Entity(EntityType type)
     {
-        this.id = id;
+        this.type = type;
         
         components = new ArrayList<Component>();
         
@@ -42,9 +42,9 @@ public class Entity
         alive = true;
     }
     
-    public Entity(EntityType id, Vector2f pos)
+    public Entity(EntityType type, Vector2f pos)
     {
-        this(id);
+        this(type);
         position = pos;
     }
     
@@ -130,7 +130,7 @@ public class Entity
     }
     
     public EntityType getId(){
-        return id;
+        return type;
     }
     
     public boolean isAlive(){
@@ -156,6 +156,13 @@ public class Entity
     {
         if(renderComponent != null){
             renderComponent.render(gc, sbg, g);
+        }
+    }
+    
+    public void reset()
+    {
+        for(Component component : components){
+           component.reset();
         }
     }
 }

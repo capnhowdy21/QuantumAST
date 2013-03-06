@@ -9,24 +9,24 @@ import org.newdawn.slick.state.StateBasedGame;
 /**
  * @author Dan Cannon
  */
-public class HorizontalMovementComponent extends Component
+public class LinearMovementComponent extends Component
 {
     float dx;
+    float dy;
     
-    public HorizontalMovementComponent(String id)
-    {
-        super(id);
-        this.dx = -.5f;
-    }
-    
-    public HorizontalMovementComponent(String id, float dx)
+    public LinearMovementComponent(String id, float dx, float dy)
     {
         super(id);
         this.dx = dx;
+        this.dy = dy;
     }
     
     public void setDx(float dx){
         this.dx = dx;
+    }
+    
+    public void setDy(float dy){
+        
     }
     
     @Override
@@ -34,14 +34,25 @@ public class HorizontalMovementComponent extends Component
     {
         Vector2f pos = owner.getPosition();
         pos.x += (dx * delta);
+        pos.y += (dy * delta);
         
-        if((dx < 0)&& (pos.x + owner.getWidth() < 0)){
+        if((dx < 0) && (pos.x + owner.getWidth() < 0)){
             owner.setAlive(false);
-        } else if((dx > 0)&& (pos.x > gc.getWidth())){
+        } else if((dx > 0) && (pos.x > gc.getWidth())){
             owner.setAlive(false);
-        }
+        } else if((dy < 0) && (pos.y < 0)){
+            owner.setAlive(false);
+        } else if((dy > 0) && pos.y + owner.getHeight() > gc.getHeight()){
+            owner.setAlive(false);
+        }   
         
         owner.setPosition(pos);
+    }
+    
+    @Override
+    public void reset()
+    {
+        //Nothing needed.
     }
     
 }

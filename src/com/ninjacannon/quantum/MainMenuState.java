@@ -16,18 +16,18 @@ import org.newdawn.slick.state.*;
  */
 public class MainMenuState extends BasicGameState
 {
-    int stateID = -1;
+    private int stateID = -1;
     
-    Image background = null;
-    Image startOption = null;
-    Image exitOption = null;
+    private Image background = null;
+    private Image startOption = null;
+    private Image exitOption = null;
     
     private static int menuX = 592;
     private static int menuY = 350;
     
-    float startGameScale = 1;
-    float exitScale = 1;
-    float scaleStep = 0.0001f;
+    private float startGameScale = 1;
+    private float exitScale = 1;
+    private float scaleStep = 0.0001f;
     
     MainMenuState(int stateID){
         this.stateID = stateID;
@@ -45,7 +45,7 @@ public class MainMenuState extends BasicGameState
         background = ImageLibrary.menu;
         startOption = ImageLibrary.start;
         exitOption = ImageLibrary.exit;
-        //SoundLibrary.MUSIC_THEME.loop();
+        SoundLibrary.MUSIC_1.loop();
     }
     
     @Override

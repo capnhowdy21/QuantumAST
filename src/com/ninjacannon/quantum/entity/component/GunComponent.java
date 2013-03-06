@@ -2,9 +2,11 @@
 package com.ninjacannon.quantum.entity.component;
 
 import com.ninjacannon.quantum.entity.Entity;
+import com.ninjacannon.quantum.entity.Entity.EntityType;
 import com.ninjacannon.quantum.entity.EntityManager;
+import com.ninjacannon.quantum.entity.SoundLibrary;
 import com.ninjacannon.quantum.entity.component.collision.NormalCollisionComponent;
-import com.ninjacannon.quantum.entity.component.movement.HorizontalMovementComponent;
+import com.ninjacannon.quantum.entity.component.movement.LinearMovementComponent;
 import com.ninjacannon.quantum.entity.component.render.ImageLibrary;
 import com.ninjacannon.quantum.entity.component.render.ImageRenderComponent;
 import org.newdawn.slick.GameContainer;
@@ -17,13 +19,25 @@ import org.newdawn.slick.state.StateBasedGame;
 public class GunComponent extends Component{
     
     private Entity bullet;
-    private int lastFired = 0;
-    private int fireInterval = 250;
+    private int lastFired;
+    private int fireInterval;
     private boolean firing;
+    private EntityType type;
     
-    public GunComponent(String id){
+    public GunComponent(String id, EntityType type)
+    {
         super(id); 
+        lastFired = 0;
+        bullet = null;
         firing = false;
+        fireInterval = 250;
+        this.type = type;
+    }
+    
+    public GunComponent(String id, EntityType type, int interval)
+    {
+        this(id, type);
+        fireInterval = interval;
     }
     
     public void setFiring(boolean firing){
@@ -39,10 +53,11 @@ public class GunComponent extends Component{
     {
         lastFired += delta;
         if(firing && lastFired >= fireInterval){
+            SoundLibrary.FX_LASER.play(.5f, .40f);
             lastFired = 0;
-            bullet = new Entity(Entity.EntityType.FRIENDLY);
+            bullet = new Entity(type);
             bullet.AddComponent(new ImageRenderComponent("Render", ImageLibrary.bullet));
-            bullet.AddComponent(new HorizontalMovementComponent("Movement", 1));
+            bullet.AddComponent(new LinearMovementComponent("Movement", 1, 0));
             bullet.AddComponent(new NormalCollisionComponent("Collision"));
             bullet.setPosition(owner.getPosition()
                     .add(new Vector2f(owner.getWidth(), + owner.getHeight()/2)));
@@ -54,6 +69,7 @@ public class GunComponent extends Component{
         fireInterval = interval;
     }
     
+    @Override
     public void reset()
     {
         lastFired = 0;

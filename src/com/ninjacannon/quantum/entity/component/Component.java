@@ -11,8 +11,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public abstract class Component 
 {
     protected String id;
-    protected Entity owner;
-    
+    protected Entity owner;   
     
     public Component(String id){
         this.id = id;
@@ -27,4 +26,5 @@ public abstract class Component
     }
     
     public abstract void update(GameContainer gc, StateBasedGame sb, int delta);
+    public abstract void reset();
 }

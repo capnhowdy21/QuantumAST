@@ -18,7 +18,8 @@ public class TurretUpgradeComponent extends UpgradeComponent
 {
     private boolean alive;
     Entity turret;
-    public TurretUpgradeComponent(String id){
+    public TurretUpgradeComponent(String id)
+    {
         super(id);
         energyCost = 50;
         alive = false;
@@ -32,7 +33,7 @@ public class TurretUpgradeComponent extends UpgradeComponent
             turret.AddComponent(new ImageRenderComponent("Render", ImageLibrary.turret));
             turret.AddComponent(new NormalCollisionComponent("Collision"));
             turret.AddComponent(new TimedComponent("Timer", 20000));
-            turret.AddComponent(new GunComponent("Gun"));
+            turret.AddComponent(new GunComponent("Gun", Entity.EntityType.FRIENDLY));
             turret.setRotation(90);
             turret.setAlive(true);
             turret.setPostition(owner.getPosition().x, owner.getPosition().y + 100);
@@ -44,7 +45,7 @@ public class TurretUpgradeComponent extends UpgradeComponent
     @Override
     public void reset()
     {
-        turret = null;
+        deactivate();
     }
 
     @Override
@@ -55,5 +56,14 @@ public class TurretUpgradeComponent extends UpgradeComponent
             alive = turret.isAlive();
         }
     }
-
+    
+    @Override
+    public void deactivate()
+    {
+        if(turret != null){
+            turret.setAlive(false);
+        }
+        turret = null;
+        alive = false;
+    }
 }

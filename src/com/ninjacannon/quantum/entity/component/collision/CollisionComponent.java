@@ -42,10 +42,19 @@ public abstract class CollisionComponent extends Component
         }
     }
     
-    public void setCollision(EntityType id){
+    public void setCollision(EntityType id)
+    {
         collided = true;
         this.eId = id;
     }
     
+    @Override
+    public void reset()
+    {
+        collided = false;
+        eId = null;
+    }
+    
     public abstract void collide();
+    
 }

@@ -9,12 +9,12 @@ import org.newdawn.slick.state.StateBasedGame;
 /**
  * @author Dan Cannon
  */
-public class KeyboardMovementComponent extends Component
+public class PlayerMovementComponent extends Component
 {
     private float dx;
     private float dy;
         
-    public KeyboardMovementComponent(String id)
+    public PlayerMovementComponent(String id)
     {
         super(id);
         dx = 0;
@@ -32,7 +32,7 @@ public class KeyboardMovementComponent extends Component
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta)
     {
-        Vector2f position = owner.getPosition().copy();
+        Vector2f position = owner.getPosition();
         
         position.x += dx * delta;
         position.y += dy * delta;        

@@ -4,10 +4,10 @@ package com.ninjacannon.quantum.entity.component.collision;
 /**
  * @author Dan Cannon
  */
-public class NukeCollisionComponent extends CollisionComponent
+public class InvulnerableCollisionComponent extends CollisionComponent
 {
     
-    public NukeCollisionComponent(String id){
+    public InvulnerableCollisionComponent(String id){
         super(id);
     }
     

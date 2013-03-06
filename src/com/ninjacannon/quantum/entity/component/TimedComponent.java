@@ -9,8 +9,8 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class TimedComponent extends Component
 {   
-    int duration;
-    int timer;
+    private int duration;
+    private int timer;
     
     public TimedComponent(String id, int duration)
     {
@@ -28,7 +28,8 @@ public class TimedComponent extends Component
             timer = 0;
         }
     }
-
+    
+    @Override
     public void reset(){
         timer = duration;
     }

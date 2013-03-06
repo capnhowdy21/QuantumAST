@@ -5,7 +5,7 @@ import com.ninjacannon.quantum.entity.Entity;
 import com.ninjacannon.quantum.entity.EntityManager;
 import com.ninjacannon.quantum.entity.component.GunComponent;
 import com.ninjacannon.quantum.entity.component.collision.ShieldComponent;
-import com.ninjacannon.quantum.entity.component.movement.KeyboardMovementComponent;
+import com.ninjacannon.quantum.entity.component.movement.PlayerMovementComponent;
 import com.ninjacannon.quantum.entity.component.render.ImageLibrary;
 import com.ninjacannon.quantum.entity.component.render.ShieldRenderComponent;
 import com.ninjacannon.quantum.entity.component.upgrades.MineUpgradeComponent;
@@ -23,7 +23,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public class Player 
 {
     private Entity ship;
-    private KeyboardMovementComponent move;
+    private PlayerMovementComponent move;
     private GunComponent gun;
     private ShieldRenderComponent render;
     private ShieldComponent shield;
@@ -45,8 +45,8 @@ public class Player
         ship.setWidth(ImageLibrary.ship.getWidth());
         ship.setScale(1f);
         
-        gun = new GunComponent("Gun");
-        move = new KeyboardMovementComponent("Movement");
+        gun = new GunComponent("Gun", Entity.EntityType.FRIENDLY);
+        move = new PlayerMovementComponent("Movement");
         render = new ShieldRenderComponent("Render", ImageLibrary.ship, ImageLibrary.shield, 3, 1, 50);
         shield = new ShieldComponent("Shield", shieldStr);
         upgrade1 = new MineUpgradeComponent("Upgrade");
@@ -110,6 +110,9 @@ public class Player
             }
             
         } else {
+            upgrade1.deactivate();
+            upgrade2.deactivate();
+            upgrade3.deactivate();
             respawnTimer -= delta;
             if(respawnTimer <= 0){
                 death();
@@ -128,7 +131,7 @@ public class Player
             ship.setAlive(true);
             EntityManager.manager.addEntity(ship);
             respawnTimer = 1200;
-            shield.reset();
+            ship.reset();
         } else {
             alive = false;
         }
@@ -142,8 +145,6 @@ public class Player
         respawnTimer = 1200;
         lives = 3;
         energy = 0;
-        shield.reset();
-        gun.reset();
-        move.reset();
+        ship.reset();
     }
 }

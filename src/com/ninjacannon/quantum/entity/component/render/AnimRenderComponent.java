@@ -13,9 +13,9 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class AnimRenderComponent extends RenderComponent
 {
-    Animation anim;
+    protected Animation anim;
     
-    public AnimRenderComponent(String id, SpriteSheet images, int w, int h, int length)
+    public AnimRenderComponent(String id, SpriteSheet images, int w, int h, int length, boolean pingpong)
     {
         super(id);
         anim = new Animation();
@@ -25,7 +25,8 @@ public class AnimRenderComponent extends RenderComponent
             }
         }
         anim.setAutoUpdate(false);
-        anim.setLooping(false);
+        anim.setLooping(true);
+        anim.setPingPong(pingpong);
     }
     
     @Override
@@ -40,8 +41,10 @@ public class AnimRenderComponent extends RenderComponent
     public void update(GameContainer gc, StateBasedGame sbg, int delta)
     {
         anim.update(delta);
-        if(anim.isStopped()){
-            owner.setAlive(false);
-        }
+    }
+    
+    @Override
+    public void reset(){
+        anim.setCurrentFrame(0);
     }
 }

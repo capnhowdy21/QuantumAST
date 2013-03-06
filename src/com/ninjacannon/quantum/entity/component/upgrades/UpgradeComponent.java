@@ -19,5 +19,5 @@ public abstract class UpgradeComponent extends Component
     }
     
     abstract public void activate();
-    abstract public void reset();
+    abstract public void deactivate();
 }

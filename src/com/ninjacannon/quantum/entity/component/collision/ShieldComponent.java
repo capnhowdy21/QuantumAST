@@ -70,10 +70,11 @@ public class ShieldComponent extends CollisionComponent
         maxStrength = strength;
     }
     
+    @Override
     public void reset()
     {
+        super.reset();
         currStrength = maxStrength;
-        collided = false;
         shielded = false;
     }
 }

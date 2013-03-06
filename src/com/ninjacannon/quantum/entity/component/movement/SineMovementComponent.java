@@ -1,7 +1,6 @@
 
 package com.ninjacannon.quantum.entity.component.movement;
 
-import com.ninjacannon.quantum.entity.EntityManager;
 import com.ninjacannon.quantum.entity.component.Component;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.geom.Vector2f;
@@ -13,14 +12,17 @@ import org.newdawn.slick.state.StateBasedGame;
 public class SineMovementComponent extends Component
 {
     float dx;
-    float midY = 0;
-    float peak = 200;
-    float interval = 250;
+    float midY;
+    float peak;
+    float interval;
     
     public SineMovementComponent(String id)
     {
         super(id);
         this.dx = -.5f;
+        midY = 0;
+        peak = 200;
+        interval = 250;
     }
     
     public SineMovementComponent(String id, float dx)
@@ -61,4 +63,8 @@ public class SineMovementComponent extends Component
         owner.setPosition(pos);
     }
     
+    @Override
+    public void reset(){
+        //do nothing;
+    }
 }

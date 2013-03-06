@@ -2,7 +2,7 @@
 package com.ninjacannon.quantum.entity;
 
 import com.ninjacannon.quantum.entity.component.collision.ExplosionCollisionComponent;
-import com.ninjacannon.quantum.entity.component.movement.HorizontalMovementComponent;
+import com.ninjacannon.quantum.entity.component.movement.LinearMovementComponent;
 import com.ninjacannon.quantum.entity.component.movement.SineMovementComponent;
 import com.ninjacannon.quantum.entity.component.render.*;
 import org.newdawn.slick.GameContainer;
@@ -18,7 +18,8 @@ public class SceneManager
     int type;
     Entity mob;
     
-    public SceneManager(){
+    public SceneManager()
+    {
         this.timer = 3000;
         type = 0;
     }
@@ -71,7 +72,7 @@ public class SceneManager
             mob.setScale(.75f);
             mob.setRotation(-90f);
             mob.setPosition(new Vector2f(width, (i)*80 + 20));
-            HorizontalMovementComponent move = new HorizontalMovementComponent("Movement");
+            LinearMovementComponent move = new LinearMovementComponent("Movement", -.5f, 0);
             mob.AddComponent(move);
             EntityManager.manager.addEntity(mob);
         }

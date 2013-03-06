@@ -29,7 +29,8 @@ public final class EntityManager
         entities.remove(e);
     }
     
-    public Entity getEntity(EntityType id){
+    public Entity getEntity(EntityType id)
+    {
         for(int i = 0; i < entities.size(); i++){
             if(entities.get(i).getId() == id){
                 return entities.get(i);

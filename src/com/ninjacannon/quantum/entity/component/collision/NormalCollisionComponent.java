@@ -19,7 +19,6 @@ public class NormalCollisionComponent extends CollisionComponent
             //do nothing.
         } else if(owner.getId() != eId){
             owner.setAlive(false);
-            System.out.println("Dead" + eId.toString());
         }
         
         eId = null;

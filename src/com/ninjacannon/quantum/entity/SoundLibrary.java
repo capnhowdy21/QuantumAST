@@ -9,10 +9,10 @@ import org.newdawn.slick.Sound;
  * @author Dan Cannon
  */
 public class SoundLibrary 
-{/*
-    public final static Music MUSIC_THEME = loadMusic("sounds/theme.ogg");
+{
+    //public final static Music MUSIC_THEME = loadMusic("sounds/theme.ogg");
     public final static Music MUSIC_1 = loadMusic("sounds/music1.ogg");
-    public final static Sound FX_LASER = loadSound("sounds/laser.wav"); 
+    public final static Sound FX_LASER = loadSound("sounds/gun.wav"); 
 
     public static Music loadMusic(String url)
     {
@@ -34,5 +34,5 @@ public class SoundLibrary
             System.exit(0);
         }
         return null;
-    }*/
+    }
 }
