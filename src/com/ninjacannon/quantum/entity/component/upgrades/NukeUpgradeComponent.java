@@ -4,6 +4,7 @@ package com.ninjacannon.quantum.entity.component.upgrades;
 import com.ninjacannon.quantum.entity.Entity;
 import com.ninjacannon.quantum.entity.EntityManager;
 import com.ninjacannon.quantum.entity.component.TimedComponent;
+import com.ninjacannon.quantum.entity.component.collision.CollisionComponent.Allegiance;
 import com.ninjacannon.quantum.entity.component.collision.InvulnerableCollisionComponent;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.state.StateBasedGame;
@@ -34,7 +35,7 @@ public class NukeUpgradeComponent extends UpgradeComponent
         if(fired){
             nuke = new Entity(Entity.EntityType.FRIENDLY);
             nuke.setPosition(0,0);
-            nuke.AddComponent(new InvulnerableCollisionComponent("Collision"));
+            nuke.AddComponent(new InvulnerableCollisionComponent("Collision", Allegiance.PLAYER));
             nuke.AddComponent(new TimedComponent("Timer", 40));
             nuke.setHeight(gc.getHeight());
             nuke.setWidth(gc.getWidth());

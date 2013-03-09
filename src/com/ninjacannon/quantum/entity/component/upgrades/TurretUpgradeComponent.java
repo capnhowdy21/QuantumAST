@@ -5,8 +5,8 @@ import com.ninjacannon.quantum.entity.Entity;
 import com.ninjacannon.quantum.entity.EntityManager;
 import com.ninjacannon.quantum.entity.component.GunComponent;
 import com.ninjacannon.quantum.entity.component.TimedComponent;
+import com.ninjacannon.quantum.entity.component.collision.CollisionComponent.Allegiance;
 import com.ninjacannon.quantum.entity.component.collision.NormalCollisionComponent;
-import com.ninjacannon.quantum.entity.component.render.ImageLibrary;
 import com.ninjacannon.quantum.entity.component.render.ImageRenderComponent;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.state.StateBasedGame;
@@ -30,11 +30,10 @@ public class TurretUpgradeComponent extends UpgradeComponent
     {   
         if(!alive){
             turret = new Entity(Entity.EntityType.FRIENDLY);
-            turret.AddComponent(new ImageRenderComponent("Render", ImageLibrary.turret));
-            turret.AddComponent(new NormalCollisionComponent("Collision"));
+            turret.AddComponent(new ImageRenderComponent("Render", "turret"));
+            turret.AddComponent(new NormalCollisionComponent("Collision", Allegiance.PLAYER));
             turret.AddComponent(new TimedComponent("Timer", 20000));
-            turret.AddComponent(new GunComponent("Gun", Entity.EntityType.FRIENDLY));
-            turret.setRotation(90);
+            turret.AddComponent(new GunComponent("Gun", 750, .5f, true));
             turret.setAlive(true);
             turret.setPostition(owner.getPosition().x, owner.getPosition().y + 100);
             ((GunComponent)turret.getComponent("Gun")).setFiring(true);

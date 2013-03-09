@@ -4,8 +4,6 @@ package com.ninjacannon.quantum.entity.component.render;
 import com.ninjacannon.quantum.entity.Entity;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
@@ -17,11 +15,11 @@ public class ShieldRenderComponent extends RenderComponent
     private ImageRenderComponent ship;
     public boolean renderShield;
     
-    public ShieldRenderComponent(String id, Image img, SpriteSheet ss, int w, int h, int l)
+    public ShieldRenderComponent(String id, String img, String ss, int l)
     {
         super(id);
         ship  = new ImageRenderComponent(id, img);
-        shield = new AnimRenderComponent(id, ss, w, h, l, false);
+        shield = new AnimRenderComponent(id, ss, l, false);
         shield.setOwnerEntity(owner);
         ship.setOwnerEntity(owner);
         renderShield = false;

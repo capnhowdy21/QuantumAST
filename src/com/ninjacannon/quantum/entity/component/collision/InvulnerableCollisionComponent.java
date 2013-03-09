@@ -7,8 +7,8 @@ package com.ninjacannon.quantum.entity.component.collision;
 public class InvulnerableCollisionComponent extends CollisionComponent
 {
     
-    public InvulnerableCollisionComponent(String id){
-        super(id);
+    public InvulnerableCollisionComponent(String id, Allegiance allegiance){
+        super(id, allegiance);
     }
     
     @Override

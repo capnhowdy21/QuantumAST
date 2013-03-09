@@ -1,7 +1,6 @@
 
 package com.ninjacannon.quantum;
 
-import com.ninjacannon.quantum.entity.SoundLibrary;
 import com.ninjacannon.quantum.entity.component.render.ImageLibrary;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -42,10 +41,10 @@ public class MainMenuState extends BasicGameState
     public void init(GameContainer gc, StateBasedGame sbg) 
             throws SlickException
     {   
-        background = ImageLibrary.menu;
-        startOption = ImageLibrary.start;
-        exitOption = ImageLibrary.exit;
-        SoundLibrary.MUSIC_1.loop();
+        ImageLibrary.getInstance().init();
+        background = ImageLibrary.getInstance().getImage("menu");
+        startOption = ImageLibrary.getInstance().getImage("start");
+        exitOption = ImageLibrary.getInstance().getImage("exit");
     }
     
     @Override

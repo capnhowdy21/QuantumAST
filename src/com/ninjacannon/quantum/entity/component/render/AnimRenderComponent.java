@@ -4,7 +4,6 @@ package com.ninjacannon.quantum.entity.component.render;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -15,15 +14,10 @@ public class AnimRenderComponent extends RenderComponent
 {
     protected Animation anim;
     
-    public AnimRenderComponent(String id, SpriteSheet images, int w, int h, int length, boolean pingpong)
+    public AnimRenderComponent(String id, String images, int length, boolean pingpong)
     {
         super(id);
-        anim = new Animation();
-        for(int y = 0; y < h; y++){
-            for(int x = 0; x < w; x++){
-                anim.addFrame(images.getSprite(x, y), length);
-            }
-        }
+        anim = new Animation(ImageLibrary.getInstance().getSheet(images), length);
         anim.setAutoUpdate(false);
         anim.setLooping(true);
         anim.setPingPong(pingpong);

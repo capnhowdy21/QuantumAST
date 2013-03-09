@@ -3,8 +3,8 @@ package com.ninjacannon.quantum.entity;
 
 import com.ninjacannon.quantum.entity.component.collision.ExplosionCollisionComponent;
 import com.ninjacannon.quantum.entity.component.movement.LinearMovementComponent;
-import com.ninjacannon.quantum.entity.component.movement.SineMovementComponent;
-import com.ninjacannon.quantum.entity.component.render.*;
+import com.ninjacannon.quantum.level.EntityFactory;
+import com.ninjacannon.quantum.level.Wave;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
@@ -16,65 +16,61 @@ public class SceneManager
 {
     int timer;
     int type;
-    Entity mob;
+    Wave level;
     
     public SceneManager()
     {
         this.timer = 3000;
         type = 0;
+        level = new Wave();
     }
     
     public void update(GameContainer gc, StateBasedGame sbg, int delta)
     {
         timer += delta;
         if(timer > 4000){
-            SpawnWave(gc.getScreenWidth(), gc.getHeight(), type);
+            SpawnWave(type);
             type++;
             timer -= 4000;
+            if(type > 2){
+                type = 0;
+            }
         }
     }
     
-    private void SpawnWave(int width, int height, int type)
+    private void SpawnWave(int type)
     {
-        if(type % 2 == 1){
-            SpawnStraightWave(width, height);
-        } else {
-            SpawnSineWave(width, height);
+        switch(type){
+            case 0: SpawnSineWave();
+                break;
+            case 1: SpawnStraightWave();
+                break;
+            case 2: SpawnTitanWave();
+                break;
         }
     }
     
-    private void SpawnSineWave(int width, int height)
+    private void SpawnSineWave()
     {   
-        for(int i = 0; i < 9; i++){
-            mob = new Entity(Entity.EntityType.ENEMY);
-            mob.AddComponent(new ImageRenderComponent("Render", ImageLibrary.enemy));
-            mob.AddComponent(new ExplosionCollisionComponent("Collision"));
-            mob.setHeight(64);
-            mob.setWidth(64);
-            mob.setScale(.75f);
-            mob.setRotation(-90f);
-            mob.setPosition(new Vector2f(width + ((i) * 70), height/2));
-            SineMovementComponent sine = new SineMovementComponent("Movement");
-            sine.setMid(mob.position.y);
-            mob.AddComponent(sine);
-            EntityManager.manager.addEntity(mob);
+        for (int i = 0; i < 10; i++)
+        {
+            //EntityManager.manager.addEntity(EntityFactory.createSwirve( 1280 + i * 84, 300, 300, 250, 500));
         }
     }
     
-    private void SpawnStraightWave(int width, int height)
+    private void SpawnStraightWave()
     {   
-        for(int i = 0; i < 9; i++){
-            mob = new Entity(Entity.EntityType.ENEMY);
-            mob.AddComponent(new ImageRenderComponent("Render", ImageLibrary.enemy));
-            mob.AddComponent(new ExplosionCollisionComponent("Collision"));
-            mob.setHeight(64);
-            mob.setWidth(64);
-            mob.setScale(.75f);
-            mob.setRotation(-90f);
-            mob.setPosition(new Vector2f(width, (i)*80 + 20));
-            LinearMovementComponent move = new LinearMovementComponent("Movement", -.5f, 0);
-            mob.AddComponent(move);
-            EntityManager.manager.addEntity(mob);
+        for (int i = 0; i < 10; i++)
+        {
+            //EntityManager.manager.addEntity(EntityFactory.createSuicide( 1280, i*84 + 10));
+        }
+    }
+    
+        private void SpawnTitanWave()
+    {   
+        for (int i = 0; i < 5; i++)
+        {
+            EntityManager.manager.addEntity(EntityFactory.createTitan(1280, i * 200 + 20));
         }
     }
 }

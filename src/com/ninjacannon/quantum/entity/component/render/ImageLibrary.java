@@ -1,6 +1,7 @@
 
 package com.ninjacannon.quantum.entity.component.render;
 
+import java.util.HashMap;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
@@ -8,45 +9,91 @@ import org.newdawn.slick.SpriteSheet;
 /**
  * @author Dan Cannon
  */
-public class ImageLibrary{
+public final class ImageLibrary{
     
-    public final static Image ship = load("images/player.png");
-    public final static Image bullet = load("images/bullet.png");
-    public final static Image exit = load("images/exit.png");
-    public final static Image start = load("images/start.png");
-    public final static Image menu = load("images/menu.png");
-    public final static Image background1 = load("images/Parallax100.png");
-    public final static Image background2 = load("images/Parallax80.png");
-    public final static Image background3 = load("images/Parallax60.png");
-    public final static Image enemies = load("images/enemy.gif");
-    public final static Image enemy = cut(enemies, 0, 0, 64, 64);
-    public final static Image turret = cut(enemies, 37, 66, 32, 32);
-    public final static SpriteSheet shield = loadSheet("images/shield.png", 64, 64);
-    public final static SpriteSheet explosion = loadSheet("images/explosion.png", 64, 64);
-    public final static SpriteSheet mine = loadSheet("images/mine.png", 16, 16);
+    private static ImageLibrary _ImageLibrary;
+    private HashMap images;
     
-    public static Image load(String url){
-        try{
-            return new Image(url);
-        } catch (SlickException ex){ 
-            System.err.println("Problem Loading resources");
-            System.exit(0);
-        }
-        return null;
+    private ImageLibrary(){
+        images = new HashMap();
     }
     
-    public static SpriteSheet loadSheet(String url, int w, int h){
-        try{
-            return new SpriteSheet(url, w, h);
-        } catch (SlickException ex){ 
-            System.err.println("Problem Loading resources");
-            System.exit(0);
-        }
-        return null;
+    public static ImageLibrary getInstance(){
+        if(_ImageLibrary == null){
+            synchronized (ImageLibrary.class) {
+                if (_ImageLibrary == null) {
+                  _ImageLibrary = new ImageLibrary();
+                }
+            }
+	}
+        return _ImageLibrary;
     }
     
-    public static Image cut(Image image, int x, int y, int width, int height)
+    public void loadImage(String key, String ref)
     {
-        return image.getSubImage(x, y, width, height);
+        images.put(key, load(ref));
+    }
+    
+    public void loadSubImage(String key, int x, int y, int width, int height, String subId)
+    {
+        Image img = (Image)images.get(key);
+        images.put(subId,img.getSubImage(x, y, width, height));
+    }
+    
+    public void loadSpriteSheet(String id, String ref, int w, int h){
+        images.put(id, loadSheet(ref, w, h));
+    }
+    
+    private Image load(String ref){
+        try{
+            return new Image(ref);
+        } catch (SlickException ex){ 
+            System.err.println("Problem Loading resources");
+            System.exit(0);
+        }
+        return null;
+    }
+    
+    private SpriteSheet loadSheet(String key, int w, int h){
+        try{
+            return new SpriteSheet(key, w, h);
+        } catch (SlickException ex){ 
+            System.err.println("Problem Loading resources");
+            System.exit(0);
+        }
+        return null;
+    }
+    
+    public Image getImage(String key){
+        return (Image)images.get(key);
+    }
+    
+    public SpriteSheet getSheet(String key){
+        return (SpriteSheet)images.get(key);
+    }
+    
+    public void close(){
+        images.clear();
+        images = null;
+    }
+    
+    public void init(){
+        loadImage("ship", "images/player.png");
+        loadImage("green bullet", "images/greenbullet.png");
+        loadImage("red bullet", "images/redbullet.png");
+        loadImage("exit", "images/exit.png");
+        loadImage("start", "images/start.png");
+        loadImage("menu", "images/menu.png");
+        loadImage("background1", "images/starsbg.png");
+        loadImage("background2","images/clouds.png");
+        loadImage("background3","images/stars.png");
+        loadImage("enemies", "images/enemy.gif");
+        loadSubImage("enemies", 65, 124, 29, 26, "suicide");
+        loadSubImage("enemies", 67, 160, 23, 26, "swirve");
+        loadSubImage("enemies", 129, 5, 57, 56, "titan");
+        loadSubImage("enemies", 67, 160, 23, 26, "turret");
+        loadSpriteSheet("shield", "images/shield.png", 64, 64);
+        loadSpriteSheet("explosion", "images/explosion.png", 64, 64);
+        loadSpriteSheet("mine", "images/mine.png", 16, 16);
     }
 }

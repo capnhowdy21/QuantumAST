@@ -20,14 +20,15 @@ public class Background
     float parallax_3_speed = .15f;
     
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
-    {
+    {   /*
         g.setDrawMode(Graphics.MODE_NORMAL);
         g.fillRect(0, 0, gc.getWidth(), gc.getHeight(), 
-                ImageLibrary.background1, parallax_1_offset, 0);
+                ImageLibrary.getInstance().getImage("background1"), parallax_1_offset, 0);
         g.fillRect(0, 0, gc.getWidth(), gc.getHeight(), 
-                ImageLibrary.background2, parallax_2_offset, 10);
+                ImageLibrary.getInstance().getImage("background2"), parallax_2_offset, 10);
         g.fillRect(0, 0, gc.getWidth(), gc.getHeight(), 
-                ImageLibrary.background3, parallax_3_offset, 30);
+                ImageLibrary.getInstance().getImage("background3"), parallax_3_offset, 30);
+                */
     }
     
     public void update(GameContainer gc, StateBasedGame sbg, int delta)

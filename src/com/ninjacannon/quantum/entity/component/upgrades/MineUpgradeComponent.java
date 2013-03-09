@@ -4,6 +4,8 @@ package com.ninjacannon.quantum.entity.component.upgrades;
 import com.ninjacannon.quantum.entity.Entity;
 import com.ninjacannon.quantum.entity.EntityManager;
 import com.ninjacannon.quantum.entity.component.TimedComponent;
+import com.ninjacannon.quantum.entity.component.collision.CollisionComponent;
+import com.ninjacannon.quantum.entity.component.collision.CollisionComponent.Allegiance;
 import com.ninjacannon.quantum.entity.component.collision.NormalCollisionComponent;
 import com.ninjacannon.quantum.entity.component.render.AnimRenderComponent;
 import com.ninjacannon.quantum.entity.component.render.ImageLibrary;
@@ -20,6 +22,7 @@ public class MineUpgradeComponent extends UpgradeComponent
     private boolean fired;
     private int lastFired;
     private int firedInterval;
+    private int maxMines;
     private Entity mine;
     private ArrayList<Entity> mines;
     
@@ -28,6 +31,7 @@ public class MineUpgradeComponent extends UpgradeComponent
         fired = false;
         lastFired = 0;
         firedInterval = 250;
+        maxMines = 5;
         energyCost = 10;
         mines = new ArrayList<Entity>();
     }
@@ -46,15 +50,15 @@ public class MineUpgradeComponent extends UpgradeComponent
     public void update(GameContainer gc, StateBasedGame sb, int delta)
     {
         lastFired += delta;
-        if(fired && lastFired >= firedInterval){
+        if(fired && lastFired >= firedInterval && !(mines.size() >= maxMines)){
             lastFired = 0;
             mine = new Entity(Entity.EntityType.FRIENDLY);
-            mine.AddComponent(new AnimRenderComponent("Render", ImageLibrary.mine, 4, 1, 100, true));
+            mine.AddComponent(new AnimRenderComponent("Render", "mine", 100, true));
             mine.AddComponent(new TimedComponent("Timer", 12000));
             mine.setPosition(owner.getPosition());
             mine.setHeight(32);
             mine.setWidth(32);
-            mine.AddComponent(new NormalCollisionComponent("Collision"));
+            mine.AddComponent(new NormalCollisionComponent("Collision", Allegiance.PLAYER));
             EntityManager.manager.addEntity(mine);
             mines.add(mine);
         }
@@ -65,10 +69,6 @@ public class MineUpgradeComponent extends UpgradeComponent
             if(!mines.get(i).isAlive()){
                 mines.remove(i);
             }
-        }
-        
-        if(mines.size() > 10){
-            mines.remove(0);
         }
     }
     

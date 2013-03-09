@@ -13,13 +13,18 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public abstract class CollisionComponent extends Component
 {
-    public boolean collided;
+    public enum Allegiance{ENEMY, PLAYER};
+    protected boolean collided;
+    protected Allegiance allegiance;
     protected EntityType eId;
+    protected Allegiance eAllegiance;
     
-    public CollisionComponent(String id)
+    
+    public CollisionComponent(String id, Allegiance allegiance)
     {
         super(id);
         collided = false;
+        this.allegiance = allegiance;
     }
     
     @Override
@@ -37,15 +42,20 @@ public abstract class CollisionComponent extends Component
         if(me.x > them.x + e.getWidth() || me.x + owner.getWidth() < them.x ||
              me.y > them.y+e.getHeight() || me.y + owner.getWidth() < them.y){
             //do nothing
-        } else if(owner.getId() != e.getId()) {
-            setCollision(e.getId());
+        } else {
+           setCollision(e.getId(), e.getCollision().getAllegiance());
         }
     }
     
-    public void setCollision(EntityType id)
+    public void setCollision(EntityType id, Allegiance eAllegiance)
     {
         collided = true;
         this.eId = id;
+        this.eAllegiance = eAllegiance;
+    }
+    
+    public boolean hasCollided(){
+        return collided;
     }
     
     @Override
@@ -53,6 +63,11 @@ public abstract class CollisionComponent extends Component
     {
         collided = false;
         eId = null;
+        eAllegiance = null;
+    }
+    
+    public Allegiance getAllegiance(){
+        return this.allegiance;
     }
     
     public abstract void collide();

@@ -1,28 +1,25 @@
 
 package com.ninjacannon.quantum.entity.component.collision;
 
-import com.ninjacannon.quantum.entity.Entity.EntityType;
 
 /**
  * @author Dan Cannon
  */
 public class NormalCollisionComponent extends CollisionComponent
 {
-    public NormalCollisionComponent(String id){
-        super(id);
+    public NormalCollisionComponent(String id, Allegiance allegiance){
+        super(id, allegiance);
     }    
 
     @Override
     public void collide()
     {
-        if(owner.getId() == EntityType.FRIENDLY && eId == EntityType.PLAYER){
-            //do nothing.
-        } else if(owner.getId() != eId){
+        if(allegiance != eAllegiance){
+            eId = null;
+            eAllegiance = null;
+            collided = false;
             owner.setAlive(false);
         }
-        
-        eId = null;
-        collided = false;
     }
 
 }

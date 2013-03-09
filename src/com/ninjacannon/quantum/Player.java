@@ -4,9 +4,9 @@ package com.ninjacannon.quantum;
 import com.ninjacannon.quantum.entity.Entity;
 import com.ninjacannon.quantum.entity.EntityManager;
 import com.ninjacannon.quantum.entity.component.GunComponent;
+import com.ninjacannon.quantum.entity.component.collision.CollisionComponent.Allegiance;
 import com.ninjacannon.quantum.entity.component.collision.ShieldComponent;
 import com.ninjacannon.quantum.entity.component.movement.PlayerMovementComponent;
-import com.ninjacannon.quantum.entity.component.render.ImageLibrary;
 import com.ninjacannon.quantum.entity.component.render.ShieldRenderComponent;
 import com.ninjacannon.quantum.entity.component.upgrades.MineUpgradeComponent;
 import com.ninjacannon.quantum.entity.component.upgrades.NukeUpgradeComponent;
@@ -31,7 +31,7 @@ public class Player
     private UpgradeComponent upgrade2;
     private UpgradeComponent upgrade3;
     private int respawnTimer = 1200;
-    private int shieldStr = 10;
+    private float shieldStr = 100;
     private int lives = 3;
     private int maxEnergy = 100;
     private int energy = 0;
@@ -41,14 +41,14 @@ public class Player
     {
         alive = true;
         ship = new Entity(Entity.EntityType.PLAYER);
-        ship.setHeight(ImageLibrary.ship.getHeight());
-        ship.setWidth(ImageLibrary.ship.getWidth());
+        ship.setHeight(64);
+        ship.setWidth(64);
         ship.setScale(1f);
         
-        gun = new GunComponent("Gun", Entity.EntityType.FRIENDLY);
+        gun = new GunComponent("Gun");
         move = new PlayerMovementComponent("Movement");
-        render = new ShieldRenderComponent("Render", ImageLibrary.ship, ImageLibrary.shield, 3, 1, 50);
-        shield = new ShieldComponent("Shield", shieldStr);
+        render = new ShieldRenderComponent("Render", "ship", "shield", 50);
+        shield = new ShieldComponent("Shield", Allegiance.PLAYER, shieldStr);
         upgrade1 = new MineUpgradeComponent("Upgrade");
         upgrade2 = new TurretUpgradeComponent("Upgrade");
         upgrade3 = new NukeUpgradeComponent("Upgrade");
@@ -66,7 +66,7 @@ public class Player
     public void update(GameContainer gc, StateBasedGame sbg, int delta)
     {
         if(ship.isAlive())
-        {
+        {           
             Input input = gc.getInput();
 
             if(input.isKeyDown(Input.KEY_W)){
@@ -85,19 +85,21 @@ public class Player
                 move.setDx(0);
             }
 
-            if(input.isKeyDown(Input.KEY_E)){
-                shield.setShielded(true);
-                render.setRenderShield(true);
-                gun.setFiring(false);
-            } else if (input.isKeyDown(Input.KEY_SPACE)){
+            if (input.isKeyDown(Input.KEY_SPACE)){
                 gun.setFiring(true);
-                shield.setShielded(false);
-                render.setRenderShield(false);
             } else {
                 gun.setFiring(false);
-                shield.setShielded(false);
-                render.setRenderShield(false);
             }
+
+            if(input.isKeyDown(Input.KEY_E)){
+                shield.setShielded(true);
+                if(shield.isShielded()){
+                    gun.setFiring(false);
+                }
+            } else {
+                shield.setShielded(false);
+            }
+            render.renderShield = shield.isShielded();
             
             if(input.isKeyDown(Input.KEY_1)){
                 upgrade1.activate();

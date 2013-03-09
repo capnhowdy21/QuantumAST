@@ -2,7 +2,6 @@
 package com.ninjacannon.quantum.entity.component.render;
 
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
@@ -10,8 +9,8 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class SingleAnimRenderComponent extends AnimRenderComponent 
 {
-    public SingleAnimRenderComponent(String id, SpriteSheet images, int w, int h, int length){
-        super(id, images, w, h, length, false);
+    public SingleAnimRenderComponent(String id, String ss, int w, int h, int length){
+        super(id, ss, length, false);
         anim.setLooping(false);
     }
             

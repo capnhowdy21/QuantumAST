@@ -14,10 +14,10 @@ public class ImageRenderComponent extends RenderComponent
 {
     Image image;
     
-    public ImageRenderComponent(String id, Image image)
+    public ImageRenderComponent(String id, String ref)
     {
         super(id);
-        this.image = image;
+        this.image = ImageLibrary.getInstance().getImage(ref);
     }
     
     @Override

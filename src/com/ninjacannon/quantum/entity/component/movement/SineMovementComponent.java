@@ -20,15 +20,22 @@ public class SineMovementComponent extends Component
     {
         super(id);
         this.dx = -.5f;
-        midY = 0;
+        if(owner != null){
+            midY = owner.getPosition().y;
+        } else {
+            midY = 0;
+        }
         peak = 200;
         interval = 250;
     }
     
-    public SineMovementComponent(String id, float dx)
+    public SineMovementComponent(String id, float dx, float midY, float peak, float interval)
     {
         super(id);
         this.dx = dx;
+        this.midY = midY;
+        this.peak = peak;
+        this.interval = interval;
     }
     
     public void setDx(float dx){
