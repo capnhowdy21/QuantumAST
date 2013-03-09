@@ -72,7 +72,7 @@ public class GamePlayState extends BasicGameState
     public void leave(GameContainer gc, StateBasedGame sbg)
             throws SlickException
     {
-        EntityManager.manager.cleanUp();
+        EntityManager.manager.reset();
         player.reset();
     }
 }

@@ -54,7 +54,7 @@ public class SceneManager
     {   
         for (int i = 0; i < 10; i++)
         {
-            //EntityManager.manager.addEntity(EntityFactory.createSwirve( 1280 + i * 84, 300, 300, 250, 500));
+            EntityManager.manager.addEntity(EntityFactory.createSwirve( 1280 + i * 84, 300, 300, 250, 500));
         }
     }
     
@@ -62,7 +62,7 @@ public class SceneManager
     {   
         for (int i = 0; i < 10; i++)
         {
-            //EntityManager.manager.addEntity(EntityFactory.createSuicide( 1280, i*84 + 10));
+            EntityManager.manager.addEntity(EntityFactory.createSuicide( 1280, i*84 + 10));
         }
     }
     

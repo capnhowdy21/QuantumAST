@@ -46,7 +46,7 @@ public final class EntityFactory
         e.setPosition(x, y);
         e.AddComponent(new ImageRenderComponent("Render", "titan"));
         e.AddComponent(new ExplosionCollisionComponent("Collision", Allegiance.ENEMY));
-        e.AddComponent(new GunComponent("Gun", 1000, .50f, true));
+        e.AddComponent(new GunComponent("Gun", 1000, -.50f, true));
         e.AddComponent(new LinearMovementComponent("Movement", -.1f, 0f)); 
         return e;
     }

@@ -68,7 +68,7 @@ public final class EntityManager
         }
     }
     
-    public void cleanUp()
+    public void reset()
     {
         entities.clear();
     }

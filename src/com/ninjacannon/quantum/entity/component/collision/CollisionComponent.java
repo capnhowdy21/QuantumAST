@@ -42,8 +42,10 @@ public abstract class CollisionComponent extends Component
         if(me.x > them.x + e.getWidth() || me.x + owner.getWidth() < them.x ||
              me.y > them.y+e.getHeight() || me.y + owner.getWidth() < them.y){
             //do nothing
-        } else {
+        } else if(owner.getId() != e.getId()){
            setCollision(e.getId(), e.getCollision().getAllegiance());
+           e.getCollision().setCollision(owner.getId(), allegiance);
+           System.out.println(owner.getId());
         }
     }
     

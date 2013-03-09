@@ -59,22 +59,23 @@ public class GunComponent extends Component{
         if(firing && lastFired >= fireInterval){
             lastFired = 0;
             for(int i = 0; i < spread; i++){
+                bullet = new Entity(EntityType.BULLET);
                 if(owner.getId() == EntityType.FRIENDLY || owner.getId() == EntityType.PLAYER){
-                    bullet = new Entity(EntityType.FRIENDLY);
                     bullet.AddComponent(new ImageRenderComponent("Render", "green bullet"));
-                    bullet.AddComponent(new NormalCollisionComponent("Collision", Allegiance.PLAYER));
-                    bullet.AddComponent(new LinearMovementComponent("Movement", bulletSpeed, i));               
+                    bullet.AddComponent(new NormalCollisionComponent("Collision", Allegiance.PLAYER));                                
                     bullet.setPosition(owner.getPosition()
                         .add(new Vector2f(owner.getWidth(), + owner.getHeight()/2)));
                 }
                 else {
-                    bullet = new Entity(EntityType.BULLET);
+                    bullet.setHeight(i);
                     bullet.AddComponent(new ImageRenderComponent("Render", "red bullet"));
-                    bullet.AddComponent(new NormalCollisionComponent("Collision", Allegiance.ENEMY));
-                    bullet.AddComponent(new LinearMovementComponent("Movement", -bulletSpeed, i));               
+                    bullet.AddComponent(new NormalCollisionComponent("Collision", Allegiance.ENEMY));           
                     bullet.setPosition(owner.getPosition()
                         .add(new Vector2f(0, + owner.getHeight()/2)));
                 }
+                bullet.setHeight(3);
+                bullet.setWidth(5);
+                bullet.AddComponent(new LinearMovementComponent("Movement", bulletSpeed, i)); 
                 EntityManager.manager.addEntity(bullet);
             }
         }
