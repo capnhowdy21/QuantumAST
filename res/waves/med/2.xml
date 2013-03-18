@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<wave delay="5000">
+	<shooter x="1024" y="10" dx="-.25f" dy="0"/>
+	<shooter x="1088" y="110" dx="-.25f" dy="0"/>
+	<shooter x="1152" y="210" dx="-.25f" dy="0"/>
+	<shooter x="1216" y="310" dx="-.25f" dy="0"/>
+	<shooter x="1216" y="410" dx="-.25f" dy="0"/>
+	<shooter x="1152" y="510" dx="-.25f" dy="0"/>
+	<shooter x="1088" y="610" dx="-.25f" dy="0"/>
+	<shooter x="1024" y="710" dx="-.25f" dy="0"/>
+</wave>

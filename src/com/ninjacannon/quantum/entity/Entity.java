@@ -15,7 +15,7 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class Entity 
 {
-    public enum EntityType{PLAYER, FRIENDLY, BULLET, ENEMY, EFFECT};
+    public enum EntityType{PLAYER, FRIENDLY, POWERUP, BULLET, ENEMY, EFFECT};
     protected EntityType type;
     protected Vector2f position;
     protected int width;

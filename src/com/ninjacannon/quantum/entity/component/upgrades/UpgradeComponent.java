@@ -8,9 +8,13 @@ import com.ninjacannon.quantum.entity.component.Component;
  */
 public abstract class UpgradeComponent extends Component
 {
-    public UpgradeComponent(String id){
+    protected EnergyComponent energy;
+    
+    public UpgradeComponent(String id, EnergyComponent ship){
         super(id);
+        this.energy = ship;
     }
+    
     
     protected int energyCost;
     

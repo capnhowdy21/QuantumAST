@@ -1,7 +1,7 @@
 
 package com.ninjacannon.quantum.entity.component.collision;
 
-import com.ninjacannon.quantum.entity.Entity.EntityType;
+import com.ninjacannon.quantum.entity.Entity;
 
 
 /**
@@ -16,13 +16,22 @@ public class NormalCollisionComponent extends CollisionComponent
     @Override
     public void collide()
     {
-        if(allegiance != eAllegiance){
-            eId = null;
-            eAllegiance = null;
+        if(owner.getId() != Entity.EntityType.POWERUP && allegiance != other.getCollision().allegiance){
+            if(other.isAlive()){
+                other.getCollision().setCollision(owner);
+            }
+            other = null;
             collided = false;
-            owner.setAlive(false);
-            if(owner.getId() == EntityType.BULLET){
-                System.out.println("Bullet");
+            health--;
+            if(health <= 0){
+                owner.setAlive(false);
+            }
+        } else if((other.getId() == Entity.EntityType.PLAYER && owner.getId() == Entity.EntityType.POWERUP)){
+            other = null;
+            collided = false;
+            health--;
+            if(health <= 0){
+                owner.setAlive(false);
             }
         }
     }

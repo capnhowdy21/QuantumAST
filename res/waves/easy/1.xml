@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<wave delay="4000">
+	<suicide x="1024" y="10" dx="-.35" dy="0"/>
+	<suicide x="1024" y="94" dx="-.35" dy="0"/>
+	<suicide x="1024" y="178" dx="-.35" dy="0"/>
+	<suicide x="1024" y="262" dx="-.35" dy="0"/>
+	<suicide x="1024" y="346" dx="-.35" dy="0"/>
+	<suicide x="1024" y="430" dx="-.35" dy="0"/>
+	<suicide x="1024" y="514" dx="-.35" dy="0"/>
+	<suicide x="1024" y="598" dx="-.35" dy="0"/>
+	<suicide x="1024" y="682" dx="-.35" dy="0"/>
+</wave>

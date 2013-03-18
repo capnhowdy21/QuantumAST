@@ -17,16 +17,18 @@ public class NukeUpgradeComponent extends UpgradeComponent
     private Entity nuke;
     public boolean fired;
     
-    public NukeUpgradeComponent(String id)
+    public NukeUpgradeComponent(String id, EnergyComponent ship)
     {
-        super(id);
+        super(id, ship);
         fired = false;
         energyCost = 100;
     }
     
     @Override
     public void activate(){
-        fired = true;
+        if(energy.getEnergy() >= energyCost){
+            fired = true;
+        }
     }
     
     @Override
@@ -42,6 +44,7 @@ public class NukeUpgradeComponent extends UpgradeComponent
             nuke.setAlive(true);
             EntityManager.manager.addEntity(nuke);
             fired = false;
+            energy.removeEnergy(energyCost);
         }
     }
     

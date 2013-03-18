@@ -1,6 +1,7 @@
 
 package com.ninjacannon.quantum.entity.component.movement;
 
+import com.ninjacannon.quantum.QuantumGame;
 import com.ninjacannon.quantum.entity.component.Component;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.geom.Vector2f;
@@ -26,7 +27,7 @@ public class LinearMovementComponent extends Component
     }
     
     public void setDy(float dy){
-        
+        this.dy = dy;
     }
     
     @Override
@@ -38,11 +39,11 @@ public class LinearMovementComponent extends Component
         
         if((dx < 0) && (pos.x + owner.getWidth() < 0)){
             owner.setAlive(false);
-        } else if((dx > 0) && (pos.x > gc.getWidth())){
+        } else if((dx > 0) && (pos.x > QuantumGame.GAMEWIDTH)){
             owner.setAlive(false);
         } else if((dy < 0) && (pos.y < 0)){
             owner.setAlive(false);
-        } else if((dy > 0) && pos.y + owner.getHeight() > gc.getHeight()){
+        } else if((dy > 0) && pos.y + owner.getHeight() > QuantumGame.GAMEHEIGHT){
             owner.setAlive(false);
         }   
         

@@ -8,6 +8,7 @@ import com.ninjacannon.quantum.entity.component.collision.CollisionComponent.All
 import com.ninjacannon.quantum.entity.component.collision.ShieldComponent;
 import com.ninjacannon.quantum.entity.component.movement.PlayerMovementComponent;
 import com.ninjacannon.quantum.entity.component.render.ShieldRenderComponent;
+import com.ninjacannon.quantum.entity.component.upgrades.EnergyComponent;
 import com.ninjacannon.quantum.entity.component.upgrades.MineUpgradeComponent;
 import com.ninjacannon.quantum.entity.component.upgrades.NukeUpgradeComponent;
 import com.ninjacannon.quantum.entity.component.upgrades.TurretUpgradeComponent;
@@ -30,11 +31,9 @@ public class Player
     private UpgradeComponent upgrade1;
     private UpgradeComponent upgrade2;
     private UpgradeComponent upgrade3;
+    public EnergyComponent energy;
     private int respawnTimer = 1200;
-    private float shieldStr = 100;
     private int lives = 3;
-    private int maxEnergy = 100;
-    private int energy = 0;
     public boolean alive;
     
     public Player()
@@ -48,15 +47,17 @@ public class Player
         gun = new GunComponent("Gun");
         move = new PlayerMovementComponent("Movement");
         render = new ShieldRenderComponent("Render", "ship", "shield", 50);
-        shield = new ShieldComponent("Shield", Allegiance.PLAYER, shieldStr);
-        upgrade1 = new MineUpgradeComponent("Upgrade");
-        upgrade2 = new TurretUpgradeComponent("Upgrade");
-        upgrade3 = new NukeUpgradeComponent("Upgrade");
+        shield = new ShieldComponent("Shield", Allegiance.PLAYER, 50);
+        energy = new EnergyComponent("Energy", 100);
+        upgrade1 = new MineUpgradeComponent("Upgrade", energy);
+        upgrade2 = new TurretUpgradeComponent("Upgrade", energy);
+        upgrade3 = new NukeUpgradeComponent("Upgrade", energy);
         
         ship.AddComponent(gun);
         ship.AddComponent(move);
         ship.AddComponent(render);
         ship.AddComponent(shield);
+        ship.AddComponent(energy);
         ship.AddComponent(upgrade1);
         ship.AddComponent(upgrade2);
         ship.AddComponent(upgrade3);
@@ -126,6 +127,26 @@ public class Player
         return ship;
     }
     
+    public float getEnergy(){
+        return (float)energy.getEnergy()/(float)energy.getMaxEnergy();
+    }
+    
+    public float getShields(){
+        return shield.getShieldStr()/shield.getMaxStrength();
+    }
+    
+    public boolean upgrade1(){
+        return energy.getEnergy() >= upgrade1.getEnergyCost();
+    }
+    
+    public boolean upgrade2(){
+        return energy.getEnergy() >= upgrade2.getEnergyCost();
+    }
+    
+    public boolean upgrade3(){
+        return energy.getEnergy() >= upgrade3.getEnergyCost();
+    }
+    
     public void death(){
         lives--;
         if(lives > 0){
@@ -134,6 +155,7 @@ public class Player
             EntityManager.manager.addEntity(ship);
             respawnTimer = 1200;
             ship.reset();
+            shield.makeInvulnerable();
         } else {
             alive = false;
         }
@@ -146,7 +168,7 @@ public class Player
         ship.setAlive(true);
         respawnTimer = 1200;
         lives = 3;
-        energy = 0;
+        energy.reset();
         ship.reset();
     }
 }

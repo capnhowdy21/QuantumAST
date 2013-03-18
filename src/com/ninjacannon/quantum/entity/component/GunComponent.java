@@ -5,7 +5,6 @@ import com.ninjacannon.quantum.entity.Entity;
 import com.ninjacannon.quantum.entity.Entity.EntityType;
 import com.ninjacannon.quantum.entity.EntityManager;
 import com.ninjacannon.quantum.entity.component.collision.CollisionComponent.Allegiance;
-import com.ninjacannon.quantum.entity.component.collision.ExplosionCollisionComponent;
 import com.ninjacannon.quantum.entity.component.collision.NormalCollisionComponent;
 import com.ninjacannon.quantum.entity.component.movement.LinearMovementComponent;
 import com.ninjacannon.quantum.entity.component.render.ImageRenderComponent;
@@ -24,6 +23,7 @@ public class GunComponent extends Component{
     private float bulletSpeed;
     private int spread;
     private boolean firing;
+    private static final float ySpeed[] = {0, -.25f, .25f, -.125f, .125f, -.375f, -.375f, -.5f, .5f};
     
     public GunComponent(String id)
     {
@@ -33,15 +33,16 @@ public class GunComponent extends Component{
         firing = false;
         fireInterval = 250;
         bulletSpeed = 1;
-        spread = 1;
+        setSpread(1);
     }
     
-    public GunComponent(String id, int interval, float bulletSpeed, boolean firing)
+    public GunComponent(String id, int interval, float bulletSpeed, int spread, boolean firing)
     {
         this(id);
         fireInterval = interval;
         this.bulletSpeed = bulletSpeed;
         this.firing = firing;
+        setSpread(spread);
     }
     
     public void setFiring(boolean firing){
@@ -75,7 +76,7 @@ public class GunComponent extends Component{
                 }
                 bullet.setHeight(3);
                 bullet.setWidth(5);
-                bullet.AddComponent(new LinearMovementComponent("Movement", bulletSpeed, i)); 
+                bullet.AddComponent(new LinearMovementComponent("Movement", bulletSpeed, ySpeed[i])); 
                 EntityManager.manager.addEntity(bullet);
             }
         }
@@ -87,6 +88,18 @@ public class GunComponent extends Component{
     
     public void setBulletSpeed(float bulletSpeed){
         this.bulletSpeed = bulletSpeed;
+    }
+    
+    public final void setSpread(int spread){
+        if(spread < 1){
+            this.spread = 0;
+        } else if(spread > 9){
+            this.spread = 9;
+        } else if(spread % 2 != 1){
+            this.spread = spread - 1;
+        } else {
+            this.spread = spread;
+        }
     }
     
     @Override

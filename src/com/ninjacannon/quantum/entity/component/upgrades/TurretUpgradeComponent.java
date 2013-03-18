@@ -18,9 +18,9 @@ public class TurretUpgradeComponent extends UpgradeComponent
 {
     private boolean alive;
     Entity turret;
-    public TurretUpgradeComponent(String id)
+    public TurretUpgradeComponent(String id, EnergyComponent ship)
     {
-        super(id);
+        super(id, ship);
         energyCost = 50;
         alive = false;
     }
@@ -28,16 +28,17 @@ public class TurretUpgradeComponent extends UpgradeComponent
     @Override
     public void activate()
     {   
-        if(!alive){
+        if(!alive & energy.getEnergy() >= energyCost){
             turret = new Entity(Entity.EntityType.FRIENDLY);
             turret.AddComponent(new ImageRenderComponent("Render", "turret"));
             turret.AddComponent(new NormalCollisionComponent("Collision", Allegiance.PLAYER));
             turret.AddComponent(new TimedComponent("Timer", 20000));
-            turret.AddComponent(new GunComponent("Gun", 750, .5f, true));
+            turret.AddComponent(new GunComponent("Gun", 750, 1, 1, true));
             turret.setAlive(true);
             turret.setPostition(owner.getPosition().x, owner.getPosition().y + 100);
             ((GunComponent)turret.getComponent("Gun")).setFiring(true);
             EntityManager.manager.addEntity(turret);
+            energy.removeEnergy(energyCost);
         }
     }
 

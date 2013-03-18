@@ -1,6 +1,7 @@
 
 package com.ninjacannon.quantum.entity.component.movement;
 
+import com.ninjacannon.quantum.QuantumGame;
 import com.ninjacannon.quantum.entity.component.Component;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.geom.Vector2f;
@@ -63,7 +64,7 @@ public class SineMovementComponent extends Component
         
         if((dx < 0)&& (pos.x + owner.getWidth() < 0)){
             owner.setAlive(false);
-        } else if((dx > 0)&& (pos.x > gc.getWidth())){
+        } else if((dx > 0)&& (pos.x > QuantumGame.GAMEWIDTH)){
             owner.setAlive(false);
         }
         

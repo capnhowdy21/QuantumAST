@@ -4,11 +4,9 @@ package com.ninjacannon.quantum.entity.component.upgrades;
 import com.ninjacannon.quantum.entity.Entity;
 import com.ninjacannon.quantum.entity.EntityManager;
 import com.ninjacannon.quantum.entity.component.TimedComponent;
-import com.ninjacannon.quantum.entity.component.collision.CollisionComponent;
 import com.ninjacannon.quantum.entity.component.collision.CollisionComponent.Allegiance;
-import com.ninjacannon.quantum.entity.component.collision.NormalCollisionComponent;
+import com.ninjacannon.quantum.entity.component.collision.HarmfulExplosionComponent;
 import com.ninjacannon.quantum.entity.component.render.AnimRenderComponent;
-import com.ninjacannon.quantum.entity.component.render.ImageLibrary;
 import java.util.ArrayList;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.state.StateBasedGame;
@@ -26,8 +24,8 @@ public class MineUpgradeComponent extends UpgradeComponent
     private Entity mine;
     private ArrayList<Entity> mines;
     
-    public MineUpgradeComponent(String id){
-        super(id);
+    public MineUpgradeComponent(String id, EnergyComponent ship){
+        super(id, ship);
         fired = false;
         lastFired = 0;
         firedInterval = 250;
@@ -43,7 +41,9 @@ public class MineUpgradeComponent extends UpgradeComponent
     @Override
     public void activate()
     {
-        fired = true;
+        if(energy.getEnergy() >= energyCost){
+            fired = true;
+        }
     }
     
     @Override
@@ -53,14 +53,15 @@ public class MineUpgradeComponent extends UpgradeComponent
         if(fired && lastFired >= firedInterval && !(mines.size() >= maxMines)){
             lastFired = 0;
             mine = new Entity(Entity.EntityType.FRIENDLY);
-            mine.AddComponent(new AnimRenderComponent("Render", "mine", 100, true));
+            mine.AddComponent(new AnimRenderComponent("Render", "mine", 200, true));
             mine.AddComponent(new TimedComponent("Timer", 12000));
             mine.setPosition(owner.getPosition());
             mine.setHeight(32);
             mine.setWidth(32);
-            mine.AddComponent(new NormalCollisionComponent("Collision", Allegiance.PLAYER));
+            mine.AddComponent(new HarmfulExplosionComponent("Collision", Allegiance.PLAYER));
             EntityManager.manager.addEntity(mine);
             mines.add(mine);
+            energy.removeEnergy(energyCost);
         }
         
         fired = false;

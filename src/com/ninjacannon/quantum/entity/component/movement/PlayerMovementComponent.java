@@ -1,6 +1,7 @@
 
 package com.ninjacannon.quantum.entity.component.movement;
 
+import com.ninjacannon.quantum.QuantumGame;
 import com.ninjacannon.quantum.entity.component.Component;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.geom.Vector2f;
@@ -39,13 +40,13 @@ public class PlayerMovementComponent extends Component
         
         if(position.x <= 0){
             position.x = 0;
-        } else if(position.x + owner.getWidth() >= gc.getWidth()){
-            position.x = gc.getWidth() - owner.getWidth();
+        } else if(position.x + owner.getWidth() >= QuantumGame.GAMEWIDTH){
+            position.x = QuantumGame.GAMEWIDTH - owner.getWidth();
         }
         if(position.y <= 0){
             position.y = 0;
-        } else if(position.y + owner.getHeight() >= gc.getHeight()){
-            position.y = gc.getHeight() - owner.getHeight();
+        } else if(position.y + owner.getHeight() >= QuantumGame.GAMEHEIGHT){
+            position.y = QuantumGame.GAMEHEIGHT - owner.getHeight();
         }
         
         owner.setPosition(position);

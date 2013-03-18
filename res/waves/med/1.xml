@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<wave delay="5000">
+	<titan x="1024" y="256" dx="-.1" dy="0"/>
+	<titan x="1024" y="512" dx="-.1" dy="0"/>
+</wave>

@@ -78,19 +78,21 @@ public final class ImageLibrary{
     }
     
     public void init(){
+        loadImage("energy", "images/energy.png");
+        loadImage("hud", "images/ui.png");
+        loadImage("powered", "images/powered.png");
         loadImage("ship", "images/player.png");
         loadImage("green bullet", "images/greenbullet.png");
         loadImage("red bullet", "images/redbullet.png");
         loadImage("exit", "images/exit.png");
         loadImage("start", "images/start.png");
         loadImage("menu", "images/menu.png");
-        loadImage("background1", "images/starsbg.png");
-        loadImage("background2","images/clouds.png");
-        loadImage("background3","images/stars.png");
+        loadImage("background", "images/background.png");
         loadImage("enemies", "images/enemy.gif");
         loadSubImage("enemies", 65, 124, 29, 26, "suicide");
         loadSubImage("enemies", 67, 160, 23, 26, "swirve");
         loadSubImage("enemies", 129, 5, 57, 56, "titan");
+        loadSubImage("enemies", 58, 39, 46, 20, "shooter");
         loadSubImage("enemies", 67, 160, 23, 26, "turret");
         loadSpriteSheet("shield", "images/shield.png", 64, 64);
         loadSpriteSheet("explosion", "images/explosion.png", 64, 64);

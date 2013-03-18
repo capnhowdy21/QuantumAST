@@ -1,8 +1,8 @@
 
 package com.ninjacannon.quantum.entity.component.collision;
 
+import com.ninjacannon.quantum.QuantumGame;
 import com.ninjacannon.quantum.entity.Entity;
-import com.ninjacannon.quantum.entity.Entity.EntityType;
 import com.ninjacannon.quantum.entity.component.Component;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.geom.Vector2f;
@@ -16,8 +16,8 @@ public abstract class CollisionComponent extends Component
     public enum Allegiance{ENEMY, PLAYER};
     protected boolean collided;
     protected Allegiance allegiance;
-    protected EntityType eId;
-    protected Allegiance eAllegiance;
+    protected Entity other;
+    protected int health;
     
     
     public CollisionComponent(String id, Allegiance allegiance)
@@ -25,6 +25,7 @@ public abstract class CollisionComponent extends Component
         super(id);
         collided = false;
         this.allegiance = allegiance;
+        health = 1;
     }
     
     @Override
@@ -40,20 +41,18 @@ public abstract class CollisionComponent extends Component
         Vector2f me = owner.getPosition();
         Vector2f them = e.getPosition();
         if(me.x > them.x + e.getWidth() || me.x + owner.getWidth() < them.x ||
-             me.y > them.y+e.getHeight() || me.y + owner.getWidth() < them.y){
+             me.y > them.y+e.getHeight() || me.y + owner.getWidth() < them.y
+                || them.x > QuantumGame.GAMEWIDTH){
             //do nothing
         } else if(owner.getId() != e.getId()){
-           setCollision(e.getId(), e.getCollision().getAllegiance());
-           e.getCollision().setCollision(owner.getId(), allegiance);
-           System.out.println(owner.getId());
+           setCollision(e);
         }
     }
     
-    public void setCollision(EntityType id, Allegiance eAllegiance)
+    public void setCollision(Entity e)
     {
         collided = true;
-        this.eId = id;
-        this.eAllegiance = eAllegiance;
+        other = e;
     }
     
     public boolean hasCollided(){
@@ -64,8 +63,7 @@ public abstract class CollisionComponent extends Component
     public void reset()
     {
         collided = false;
-        eId = null;
-        eAllegiance = null;
+        other = null;
     }
     
     public Allegiance getAllegiance(){
@@ -74,4 +72,7 @@ public abstract class CollisionComponent extends Component
     
     public abstract void collide();
     
+    public void setHealth(int health){
+        this.health = health;
+    }
 }

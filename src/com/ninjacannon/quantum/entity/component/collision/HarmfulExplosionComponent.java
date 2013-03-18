@@ -4,18 +4,18 @@ package com.ninjacannon.quantum.entity.component.collision;
 import com.ninjacannon.quantum.entity.Entity;
 import com.ninjacannon.quantum.entity.EntityManager;
 import com.ninjacannon.quantum.level.EntityFactory;
+import org.newdawn.slick.geom.Vector2f;
 
 /**
  * @author Dan Cannon
  */
-public class ExplosionCollisionComponent extends CollisionComponent
+public class HarmfulExplosionComponent extends CollisionComponent
 {
-    private static double energyRate = .25;
-    private static final double baseEnergyRate = .25;
-    public ExplosionCollisionComponent(String id, Allegiance allegiance){
+
+    public HarmfulExplosionComponent(String id, Allegiance allegiance){
         super(id, allegiance);
     }
-
+    
     @Override
     public void collide()
     {
@@ -26,16 +26,15 @@ public class ExplosionCollisionComponent extends CollisionComponent
             other = null;
             collided = false;
             health--;
-            if(health <=0){
+            if(health <= 0){
                 owner.setAlive(false);
-                EntityManager.manager.addEntity(EntityFactory.createExplosion(owner.getPosition(), .5f));
-                if(Math.random() < energyRate){
-                    EntityManager.manager.addEntity(EntityFactory.createEnergy(owner.getPosition()));
-                    energyRate = baseEnergyRate;
-                } else {
-                    energyRate += .025;
-                }
+                Entity explosion = EntityFactory.createExplosion(owner.getPosition().sub(new Vector2f(32, 32)), 1f);
+                explosion.setHeight(64);
+                explosion.setWidth(64);
+                explosion.AddComponent(new InvulnerableCollisionComponent("Collision", allegiance));
+                EntityManager.manager.addEntity(explosion);
             }
         }
     }
+
 }
