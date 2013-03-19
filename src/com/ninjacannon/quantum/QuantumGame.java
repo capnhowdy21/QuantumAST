@@ -32,7 +32,7 @@ public class QuantumGame extends StateBasedGame
       AppGameContainer app = new AppGameContainer(new QuantumGame());
       app.setMaximumLogicUpdateInterval(20);
       app.setMinimumLogicUpdateInterval(20);
-      app.setDisplayMode(GAMEWIDTH, GAMEHEIGHT, true);
+      app.setDisplayMode(GAMEWIDTH, GAMEHEIGHT, false);
       app.setResizable(false);
       app.setShowFPS(true);
       app.start();
