@@ -5,15 +5,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
-import org.newdawn.slick.util.ResourceLoader;
 
 /**
  * @author Dan Cannon
  */
 public class Level 
 {   
-    private static String seperator = System.getProperty("file.separator");
-    private static String string = ResourceLoader.getResource("waves").toString();
+    private static String string;
     private static ArrayList<String> easy;
     private static ArrayList<String> med;
     private static ArrayList<String> hard;
@@ -53,10 +51,10 @@ public class Level
         Random random = new Random();
         while(rating > 0){
             if(Math.random() > .50){
-                level.add(string + seperator + "med"+ seperator + med.get(random.nextInt(med.size())));
+                level.add(string + "/med/"+ med.get(random.nextInt(med.size())));
                 rating -= 2;
             } else {
-                level.add(string + seperator + "easy"+ seperator + easy.get(random.nextInt(easy.size())));
+                level.add(string + "/easy/"+ easy.get(random.nextInt(easy.size())));
                 rating -= 1;
             }
         }
@@ -68,13 +66,13 @@ public class Level
         while(rating > 0){
             double num = Math.random();
             if(num > .85){
-                level.add(string + seperator + "hard"+ seperator + hard.get(random.nextInt(hard.size()-1)));
+                level.add(string + "/hard/"+ hard.get(random.nextInt(hard.size()-1)));
                 rating -= 3;
             } else if (num < .15){
-                level.add(string + seperator + "easy"+ seperator + easy.get(random.nextInt(easy.size()-1)));
+                level.add(string + "/easy/"+ easy.get(random.nextInt(easy.size()-1)));
                 rating -= 1;
             } else {
-                level.add(string + seperator + "med"+ seperator + med.get(random.nextInt(med.size()-1)));
+                level.add(string + "/med/"+ med.get(random.nextInt(med.size()-1)));
                 rating -=2;
             }
         }
@@ -85,10 +83,10 @@ public class Level
         Random random = new Random();
         while(rating > 0){
             if(Math.random() > .75){
-                level.add(string + seperator + "med"+ seperator + med.get(random.nextInt(med.size()-1)));
+                level.add(string + "/med/" + med.get(random.nextInt(med.size()-1)));
                 rating -= 2;
             } else {
-                level.add(string + seperator + "hard"+ seperator + hard.get(random.nextInt(hard.size()-1)));
+                level.add(string + "/hard/"+hard.get(random.nextInt(hard.size()-1)));
                 rating -= 3;
             }
         }
