@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<wave delay="5000">
+<wave delay="4000">
 	<swirve x="1024" y="384" dx="-.35" midY="384" peak="-300" interval="250"/>
 	<swirve x="1108" y="384" dx="-.35" midY="384" peak="-300" interval="250"/>
 	<swirve x="1192" y="384" dx="-.35" midY="384" peak="-300" interval="250"/>
@@ -7,7 +7,6 @@
 	<swirve x="1360" y="384" dx="-.35" midY="384" peak="-300" interval="250"/>
 	<swirve x="1444" y="384" dx="-.35" midY="384" peak="-300" interval="250"/>
 	<swirve x="1528" y="384" dx="-.35" midY="384" peak="-300" interval="250"/>
-	<titan x="1024" y="384" dx="-.1" dy="0"/>
     <swirve x="1048" y="384" dx="-.35" midY="384" peak="300" interval="250"/>
 	<swirve x="1132" y="384" dx="-.35" midY="384" peak="300" interval="250"/>
 	<swirve x="1216" y="384" dx="-.35" midY="384" peak="300" interval="250"/>

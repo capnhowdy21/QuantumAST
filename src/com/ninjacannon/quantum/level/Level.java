@@ -1,11 +1,7 @@
 
 package com.ninjacannon.quantum.level;
 
-import com.ninjacannon.quantum.QuantumGame;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 import org.newdawn.slick.util.ResourceLoader;
@@ -18,6 +14,7 @@ public class Level
     private static ArrayList<String> easy;
     private static ArrayList<String> med;
     private static ArrayList<String> hard;
+    private static ArrayList<String> test;
     
     private ArrayList<String> level;
     private int nextWave;
@@ -35,6 +32,8 @@ public class Level
             case 2: GenerateMedLevel(difficulty * length * 25);
                 break;
             case 3: GenerateHardLevel(difficulty * length * 25);
+                break;
+            case 4: GenerateTestLevel(25);
                 break;
         }
     }
@@ -95,6 +94,19 @@ public class Level
         }
     }
     
+    private void GenerateTestLevel(int rating)
+    {
+        int i = 0;
+        while(rating > 0){
+            level.add("waves/test/" + test.get(i));
+            i++;
+            rating--;
+            if(i >= test.size()){
+                i = 0;
+            }
+        }
+    }
+    
     public final void init()
     {
         
@@ -114,6 +126,12 @@ public class Level
         hard = new ArrayList<String>();
         while(sc.hasNextLine()){
             hard.add(sc.nextLine());
+        }
+        
+        sc = new Scanner(ResourceLoader.getResourceAsStream("waves/test/waves.txt"));
+        test = new ArrayList<String>();
+        while(sc.hasNextLine()){
+            test.add(sc.nextLine());
         }
     }
 }

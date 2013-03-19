@@ -7,4 +7,11 @@
 	<suicide x="1360" y="246" dx="-.35"  dy=".1"/>
 	<suicide x="1444" y="330" dx="-.35"  dy=".1"/>
 	<suicide x="1528" y="414" dx="-.35"  dy=".1"/>
+	<suicide x="1548" y="354" dx="-.35"  dy="-.1"/>
+	<suicide x="1464" y="438" dx="-.35"  dy="-.1"/>
+	<suicide x="1380" y="522" dx="-.35"  dy="-.1"/>
+	<suicide x="1296" y="606" dx="-.35"  dy="-.1"/>
+	<suicide x="1212" y="690" dx="-.35" dy="-.1"/>
+	<suicide x="1128" y="772" dx="-.35" dy="-.1"/>
+	<suicide x="1044" y="858" dx="-.35" dy="-.1"/>
 </wave>

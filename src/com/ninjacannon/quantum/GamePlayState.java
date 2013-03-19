@@ -99,9 +99,12 @@ public class GamePlayState extends BasicGameState
         }
         
         if(!player.alive){
-            sbg.enterState(0);
+            sbg.enterState(QuantumGame.MAINMENUSTATE);
         }
         
+        if(scene.isComplete()){
+            sbg.enterState(QuantumGame.MAINMENUSTATE);
+        }
     }
     
     @Override

@@ -1,18 +1,19 @@
 <?xml version="1.0"?>
-<wave delay="4000">
-	<swirve x="1024" y="384" dx="-.35" midY="384" peak="-300" interval="250"/>
-	<swirve x="1108" y="384" dx="-.35" midY="384" peak="-300" interval="250"/>
-	<swirve x="1192" y="384" dx="-.35" midY="384" peak="-300" interval="250"/>
-	<swirve x="1276" y="384" dx="-.35" midY="384" peak="-300" interval="250"/>
-	<swirve x="1360" y="384" dx="-.35" midY="384" peak="-300" interval="250"/>
-	<swirve x="1444" y="384" dx="-.35" midY="384" peak="-300" interval="250"/>
-	<swirve x="1528" y="384" dx="-.35" midY="384" peak="-300" interval="250"/>
-	<titan x="1024" y="256" dx="-.1" dy="0"/>
-        	<swirve x="1048" y="384" dx="-.35" midY="384" peak="300" interval="250"/>
-	<swirve x="1132" y="384" dx="-.35" midY="384" peak="300" interval="250"/>
-	<swirve x="1216" y="384" dx="-.35" midY="384" peak="300" interval="250"/>
-	<swirve x="1300" y="384" dx="-.35" midY="384" peak="300" interval="250"/>
-	<swirve x="1383" y="384" dx="-.35" midY="384" peak="300" interval="250"/>
-	<swirve x="1458" y="384" dx="-.35" midY="384" peak="300" interval="250"/>
-	<swirve x="1552" y="384" dx="-.35" midY="384" peak="300" interval="250"/>
+<wave delay="5000">
+	<shooter x="1024" y="64" dx="-.185f" dy="0"/>
+	<suicide x="1024" y="128" dx="-.35" dy="0"/>
+	<suicide x="1536" y="128" dx="-.35" dy="0"/>
+	<shooter x="1024" y="192" dx="-.185f" dy="0"/>
+	<suicide x="1024" y="256" dx="-.35" dy="0"/>
+	<suicide x="1536" y="256" dx="-.35" dy="0"/>
+	<shooter x="1024" y="320" dx="-.185f" dy="0"/>
+	<suicide x="1024" y="384" dx="-.35" dy="0"/>
+	<suicide x="1536" y="384" dx="-.35" dy="0"/>
+	<shooter x="1024" y="448" dx="-.185f" dy="0"/>
+	<suicide x="1024" y="512" dx="-.35" dy="0"/>
+	<suicide x="1536" y="512" dx="-.35" dy="0"/>
+	<shooter x="1024" y="576" dx="-.185f" dy="0"/>
+	<suicide x="1024" y="640" dx="-.35" dy="0"/>
+	<suicide x="1536" y="640" dx="-.35" dy="0"/>
+	<shooter x="1024" y="704" dx="-.185f" dy="0"/>
 </wave>

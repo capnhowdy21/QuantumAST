@@ -1,6 +1,7 @@
 
 package com.ninjacannon.quantum;
 
+import javax.swing.JOptionPane;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -17,7 +18,9 @@ public class QuantumGame extends StateBasedGame
     
     public static final int MAINMENUSTATE = 0;
     public static final int GAMEPLAYSTATE = 1;
+    public static final int OVERMAPSTATE = 2;
     
+    public static final String version = "0.1.01a";
     
     public QuantumGame()
     {
@@ -29,10 +32,16 @@ public class QuantumGame extends StateBasedGame
      */
     public static void main(String[] args) throws SlickException
     { 
+      boolean windowed = false;
+      int n = JOptionPane.showConfirmDialog(null, "Would you like to run this game fullscreen?",
+              "QuantumAST", JOptionPane.YES_NO_OPTION);
+      if(n == 0){
+          windowed = true;
+      }
       AppGameContainer app = new AppGameContainer(new QuantumGame());
       app.setMaximumLogicUpdateInterval(20);
       app.setMinimumLogicUpdateInterval(20);
-      app.setDisplayMode(GAMEWIDTH, GAMEHEIGHT, false);
+      app.setDisplayMode(GAMEWIDTH, GAMEHEIGHT, windowed);
       app.setResizable(false);
       app.setShowFPS(true);
       app.start();
@@ -42,6 +51,5 @@ public class QuantumGame extends StateBasedGame
     public void initStatesList(GameContainer gc) throws SlickException
     {
         this.addState(new MainMenuState(MAINMENUSTATE));
-        this.addState(new GamePlayState(GAMEPLAYSTATE));
     }
 }

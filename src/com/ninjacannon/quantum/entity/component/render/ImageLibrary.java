@@ -97,5 +97,6 @@ public final class ImageLibrary{
         loadSpriteSheet("shield", "images/shield.png", 64, 64);
         loadSpriteSheet("explosion", "images/explosion.png", 64, 64);
         loadSpriteSheet("mine", "images/mine.png", 16, 16);
+        loadSpriteSheet("font", "images/font.png", 8, 8);
     }
 }

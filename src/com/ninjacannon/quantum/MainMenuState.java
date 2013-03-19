@@ -7,6 +7,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheetFont;
 import org.newdawn.slick.state.*;
 
 
@@ -42,6 +43,7 @@ public class MainMenuState extends BasicGameState
             throws SlickException
     {   
         ImageLibrary.getInstance().init();
+        gc.setDefaultFont(new SpriteSheetFont(ImageLibrary.getInstance().getSheet("font"), ' '));
         background = ImageLibrary.getInstance().getImage("menu");
         startOption = ImageLibrary.getInstance().getImage("start");
         exitOption = ImageLibrary.getInstance().getImage("exit");
@@ -54,6 +56,7 @@ public class MainMenuState extends BasicGameState
         background.draw(0, 0);
         startOption.draw(menuX, menuY, startGameScale);
         exitOption.draw(menuX + 6, menuY + 60, exitScale);
+        gc.getDefaultFont().drawString(890, 10, "Version: " + QuantumGame.version);
     }
     
     @Override
@@ -86,6 +89,9 @@ public class MainMenuState extends BasicGameState
             }
   
             if ( input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) ){
+                if(sbg.getState(QuantumGame.GAMEPLAYSTATE) == null){
+                    sbg.addState(new GamePlayState(QuantumGame.GAMEPLAYSTATE));
+                }
                 sbg.enterState(QuantumGame.GAMEPLAYSTATE);
             }
         }else{
