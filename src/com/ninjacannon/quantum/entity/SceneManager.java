@@ -30,7 +30,6 @@ public class SceneManager
             timer -= delay;
             String wave = level.nextWave();
             if(wave != null){
-                System.out.println("Wave");
                 delay = Wave.createWave(wave);
             } else {
                 sbg.enterState(QuantumGame.MAINMENUSTATE);

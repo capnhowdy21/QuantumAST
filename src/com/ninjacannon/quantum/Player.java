@@ -92,7 +92,7 @@ public class Player
                 gun.setFiring(false);
             }
 
-            if(input.isKeyDown(Input.KEY_E)){
+            if(input.isKeyDown(Input.KEY_LSHIFT)){
                 shield.setShielded(true);
                 if(shield.isShielded()){
                     gun.setFiring(false);
