@@ -84,7 +84,7 @@ public class GamePlayState extends BasicGameState
         }
         
         if(input.isKeyPressed(Input.KEY_TAB)){
-            player.energy.addEnergy(10);
+            player.energy.addEnergy(100);
         }
         
         background.update(gc, sbg, delta);
@@ -111,6 +111,7 @@ public class GamePlayState extends BasicGameState
     public void leave(GameContainer gc, StateBasedGame sbg)
             throws SlickException
     {
+        scene = null;
         EntityManager.manager.reset();
         player.reset();
     }

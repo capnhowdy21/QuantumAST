@@ -2,13 +2,13 @@
 package com.ninjacannon.quantum.level;
 
 import com.ninjacannon.quantum.entity.Entity;
-import com.ninjacannon.quantum.entity.EntityManager;
 import com.ninjacannon.quantum.entity.component.GunComponent;
 import com.ninjacannon.quantum.entity.component.collision.CollisionComponent.Allegiance;
 import com.ninjacannon.quantum.entity.component.collision.ExplosionCollisionComponent;
 import com.ninjacannon.quantum.entity.component.collision.NormalCollisionComponent;
 import com.ninjacannon.quantum.entity.component.movement.LinearMovementComponent;
 import com.ninjacannon.quantum.entity.component.movement.SineMovementComponent;
+import com.ninjacannon.quantum.entity.component.render.AnimRenderComponent;
 import com.ninjacannon.quantum.entity.component.render.ImageRenderComponent;
 import com.ninjacannon.quantum.entity.component.render.SingleAnimRenderComponent;
 import org.newdawn.slick.geom.Vector2f;
@@ -68,6 +68,17 @@ public final class EntityFactory
         return e;
     }
     
+    public static Entity createCloak(int x, int y, float dx, float dy){
+        Entity e = new Entity(Entity.EntityType.ENEMY);
+        e.setWidth(27);
+        e.setHeight(24);
+        e.setPosition(x, y);
+        e.AddComponent(new AnimRenderComponent("Render", "cloak", 250, true));
+        e.AddComponent(new ExplosionCollisionComponent("Collision", Allegiance.ENEMY));
+        e.AddComponent(new LinearMovementComponent("Movement", dx, dy)); 
+        return e;
+    }
+        
     public static Entity createEnergy(Vector2f vector)
     {
         Entity e = new Entity(Entity.EntityType.POWERUP);

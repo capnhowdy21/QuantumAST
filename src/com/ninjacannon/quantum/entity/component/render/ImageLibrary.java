@@ -98,5 +98,6 @@ public final class ImageLibrary{
         loadSpriteSheet("explosion", "images/explosion.png", 64, 64);
         loadSpriteSheet("mine", "images/mine.png", 16, 16);
         loadSpriteSheet("font", "images/font.png", 8, 8);
+        loadSpriteSheet("cloak", "images/cloak.png", 32, 32);
     }
 }

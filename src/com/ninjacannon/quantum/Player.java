@@ -70,17 +70,17 @@ public class Player
         {           
             Input input = gc.getInput();
 
-            if(input.isKeyDown(Input.KEY_W)){
+            if(input.isKeyDown(Input.KEY_W) || input.isKeyDown(Input.KEY_UP)){
                 move.setDY(-.2f);
-            } else if(input.isKeyDown(Input.KEY_S)){
+            } else if(input.isKeyDown(Input.KEY_S) || input.isKeyDown(Input.KEY_DOWN)){
                 move.setDY(.2f);
             } else {
                 move.setDY(0);
             }
 
-            if(input.isKeyDown(Input.KEY_D)){
+            if(input.isKeyDown(Input.KEY_D) || input.isKeyDown(Input.KEY_RIGHT)){
                 move.setDx(.3f);
-            } else if(input.isKeyDown(Input.KEY_A)){
+            } else if(input.isKeyDown(Input.KEY_A) || input.isKeyDown(Input.KEY_LEFT)){
                 move.setDx(-.2f);
             } else {
                 move.setDx(0);
@@ -92,7 +92,7 @@ public class Player
                 gun.setFiring(false);
             }
 
-            if(input.isKeyDown(Input.KEY_LSHIFT)){
+            if(input.isKeyDown(Input.KEY_LSHIFT) || input.isKeyDown(Input.KEY_RSHIFT)){
                 shield.setShielded(true);
                 if(shield.isShielded()){
                     gun.setFiring(false);
@@ -102,13 +102,13 @@ public class Player
             }
             render.renderShield = shield.isShielded();
             
-            if(input.isKeyDown(Input.KEY_1)){
+            if(input.isKeyDown(Input.KEY_1) || input.isKeyDown(Input.KEY_NUMPAD1)){
                 upgrade1.activate();
             }
-            if(input.isKeyDown(Input.KEY_2)){
+            if(input.isKeyDown(Input.KEY_2) || input.isKeyDown(Input.KEY_NUMPAD2)){
                 upgrade2.activate();
             }
-            if(input.isKeyDown(Input.KEY_3)){
+            if(input.isKeyDown(Input.KEY_3) || input.isKeyDown(Input.KEY_NUMPAD3)){
                 upgrade3.activate();
             }
             

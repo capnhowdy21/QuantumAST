@@ -77,6 +77,12 @@ public class Wave
                         (float)element.getDoubleAttribute("dx"),
                         (float)element.getDoubleAttribute("dy"));
                     break;
+                case cloak: e=EntityFactory.createCloak(
+                        element.getIntAttribute("x"), 
+                        element.getIntAttribute("y"), 
+                        (float)element.getDoubleAttribute("dx"),
+                        (float)element.getDoubleAttribute("dy"));
+                    break;
             }
         }catch (SlickXMLException ex){
             System.out.println("Error reading file:" + ex);
@@ -86,7 +92,7 @@ public class Wave
     }
     
     
-    private static enum Enemy {swirve, suicide, titan, shooter}
+    private static enum Enemy {swirve, suicide, titan, shooter, cloak}
     
     private static Enemy getType(String name){
         Enemy type = Enemy.swirve;
@@ -98,6 +104,8 @@ public class Wave
             type = Enemy.titan;
         } else if(name.equalsIgnoreCase("shooter")){
             type =Enemy.shooter;
+        } else if(name.equalsIgnoreCase("cloak")){
+            type = Enemy.cloak;
         }
         return type;
     }
