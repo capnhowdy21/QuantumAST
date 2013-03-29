@@ -89,11 +89,11 @@ public final class ImageLibrary{
         loadImage("menu", "images/menu.png");
         loadImage("background", "images/background.png");
         loadImage("enemies", "images/enemy.gif");
+        loadImage("turret", "images/turret.png");
         loadSubImage("enemies", 65, 124, 29, 26, "suicide");
         loadSubImage("enemies", 67, 160, 23, 26, "swirve");
         loadSubImage("enemies", 129, 5, 57, 56, "titan");
         loadSubImage("enemies", 58, 39, 46, 20, "shooter");
-        loadSubImage("enemies", 67, 160, 23, 26, "turret");
         loadSpriteSheet("shield", "images/shield.png", 64, 64);
         loadSpriteSheet("explosion", "images/explosion.png", 64, 64);
         loadSpriteSheet("mine", "images/mine.png", 16, 16);

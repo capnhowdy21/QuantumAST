@@ -30,6 +30,8 @@ public class TurretUpgradeComponent extends UpgradeComponent
     {   
         if(!alive & energy.getEnergy() >= energyCost){
             turret = new Entity(Entity.EntityType.FRIENDLY);
+            turret.setWidth(16);
+            turret.setHeight(16);
             turret.AddComponent(new ImageRenderComponent("Render", "turret"));
             turret.AddComponent(new NormalCollisionComponent("Collision", Allegiance.PLAYER));
             turret.AddComponent(new TimedComponent("Timer", 20000));

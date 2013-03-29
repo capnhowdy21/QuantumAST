@@ -9,17 +9,18 @@ import org.newdawn.slick.geom.Vector2f;
 /**
  * @author Dan Cannon
  */
-public class HarmfulExplosionComponent extends CollisionComponent
+public class MineCollisionComponent extends CollisionComponent
 {
 
-    public HarmfulExplosionComponent(String id, Allegiance allegiance){
+    public MineCollisionComponent(String id, Allegiance allegiance){
         super(id, allegiance);
     }
     
     @Override
     public void collide()
     {
-        if(other.getId() != Entity.EntityType.POWERUP && allegiance != other.getCollision().allegiance){
+        if(other.getId() != Entity.EntityType.POWERUP && allegiance != other.getCollision().allegiance &&
+                other.getId() != Entity.EntityType.BULLET){
             if(other.isAlive()){
                 other.getCollision().setCollision(owner);
             }

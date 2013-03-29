@@ -20,7 +20,7 @@ public class QuantumGame extends StateBasedGame
     public static final int GAMEPLAYSTATE = 1;
     public static final int OVERMAPSTATE = 2;
     
-    public static final String version = "0.1.01a";
+    public static final String version = "0.1.02a";
     
     public QuantumGame()
     {

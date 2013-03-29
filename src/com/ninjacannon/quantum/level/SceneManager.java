@@ -1,8 +1,7 @@
 
-package com.ninjacannon.quantum.entity;
+package com.ninjacannon.quantum.level;
 
-import com.ninjacannon.quantum.level.Level;
-import com.ninjacannon.quantum.level.Wave;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.state.StateBasedGame;
 

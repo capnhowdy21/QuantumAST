@@ -2,7 +2,7 @@
 package com.ninjacannon.quantum;
 
 import com.ninjacannon.quantum.entity.EntityManager;
-import com.ninjacannon.quantum.entity.SceneManager;
+import com.ninjacannon.quantum.level.SceneManager;
 import com.ninjacannon.quantum.entity.component.render.ImageLibrary;
 import com.ninjacannon.quantum.level.Background;
 import org.newdawn.slick.Color;

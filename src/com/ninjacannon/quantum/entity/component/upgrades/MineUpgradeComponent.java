@@ -5,7 +5,7 @@ import com.ninjacannon.quantum.entity.Entity;
 import com.ninjacannon.quantum.entity.EntityManager;
 import com.ninjacannon.quantum.entity.component.TimedComponent;
 import com.ninjacannon.quantum.entity.component.collision.CollisionComponent.Allegiance;
-import com.ninjacannon.quantum.entity.component.collision.HarmfulExplosionComponent;
+import com.ninjacannon.quantum.entity.component.collision.MineCollisionComponent;
 import com.ninjacannon.quantum.entity.component.render.AnimRenderComponent;
 import java.util.ArrayList;
 import org.newdawn.slick.GameContainer;
@@ -58,7 +58,7 @@ public class MineUpgradeComponent extends UpgradeComponent
             mine.setPosition(owner.getPosition());
             mine.setHeight(32);
             mine.setWidth(32);
-            mine.AddComponent(new HarmfulExplosionComponent("Collision", Allegiance.PLAYER));
+            mine.AddComponent(new MineCollisionComponent("Collision", Allegiance.PLAYER));
             EntityManager.manager.addEntity(mine);
             mines.add(mine);
             energy.removeEnergy(energyCost);
