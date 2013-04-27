@@ -12,7 +12,7 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public final class EntityManager 
 {
-    
+    public int score = 0;
     public final static EntityManager manager = new EntityManager();
     private volatile ArrayList<Entity> entities;
     
@@ -71,6 +71,7 @@ public final class EntityManager
     public void reset()
     {
         entities.clear();
+        score = 0;
     }
     
 }

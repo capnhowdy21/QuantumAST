@@ -18,6 +18,7 @@ public abstract class CollisionComponent extends Component
     protected Allegiance allegiance;
     protected Entity other;
     protected int health;
+    protected int points;
     
     
     public CollisionComponent(String id, Allegiance allegiance)
@@ -74,5 +75,9 @@ public abstract class CollisionComponent extends Component
     
     public void setHealth(int health){
         this.health = health;
+    }
+    
+    public void setPoints(int points){
+        this.points = points;
     }
 }

@@ -10,8 +10,8 @@ import com.ninjacannon.quantum.level.EntityFactory;
  */
 public class ExplosionCollisionComponent extends CollisionComponent
 {
-    private static double energyRate = .25;
-    private static final double baseEnergyRate = .25;
+    private static double energyRate = .20;
+    private static final double baseEnergyRate = .20;
     public ExplosionCollisionComponent(String id, Allegiance allegiance){
         super(id, allegiance);
     }
@@ -29,6 +29,7 @@ public class ExplosionCollisionComponent extends CollisionComponent
             if(health <=0){
                 owner.setAlive(false);
                 EntityManager.manager.addEntity(EntityFactory.createExplosion(owner.getPosition(), .5f));
+                EntityManager.manager.score += 10;
                 if(Math.random() < energyRate){
                     EntityManager.manager.addEntity(EntityFactory.createEnergy(owner.getPosition()));
                     energyRate = baseEnergyRate;

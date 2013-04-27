@@ -27,6 +27,7 @@ public final class EntityFactory
         e.AddComponent(new ImageRenderComponent("Render", "suicide"));
         e.AddComponent(new ExplosionCollisionComponent("Collision", Allegiance.ENEMY));
         e.AddComponent(new LinearMovementComponent("Movement", dx, dy)); 
+        e.getCollision().setPoints(10);
         return e;
     }
     
@@ -39,6 +40,7 @@ public final class EntityFactory
         e.AddComponent(new ImageRenderComponent("Render", "swirve"));
         e.AddComponent(new ExplosionCollisionComponent("Collision", Allegiance.ENEMY));
         e.AddComponent(new SineMovementComponent("Movemenet", dx, midY, peak, interval));
+        e.getCollision().setPoints(20);
         return e;
     }
     
@@ -50,8 +52,10 @@ public final class EntityFactory
         e.setPosition(x, y);
         e.AddComponent(new ImageRenderComponent("Render", "titan"));
         e.AddComponent(new ExplosionCollisionComponent("Collision", Allegiance.ENEMY));
+        e.getCollision().setHealth(3);
         e.AddComponent(new GunComponent("Gun", 1000, -.375f, 5, true));
         e.AddComponent(new LinearMovementComponent("Movement", dx, dy)); 
+        e.getCollision().setPoints(100);
         return e;
     }
     
@@ -65,6 +69,7 @@ public final class EntityFactory
         e.AddComponent(new ExplosionCollisionComponent("Collision", Allegiance.ENEMY));
         e.AddComponent(new LinearMovementComponent("Movement", dx, dy)); 
         e.AddComponent(new GunComponent("Gun", 1500, -.375f, 1, true));
+        e.getCollision().setPoints(30);
         return e;
     }
     
@@ -76,6 +81,7 @@ public final class EntityFactory
         e.AddComponent(new AnimRenderComponent("Render", "cloak", 250, true));
         e.AddComponent(new ExplosionCollisionComponent("Collision", Allegiance.ENEMY));
         e.AddComponent(new LinearMovementComponent("Movement", dx, dy)); 
+        e.getCollision().setPoints(50);
         return e;
     }
         
@@ -86,6 +92,7 @@ public final class EntityFactory
         e.AddComponent(new ImageRenderComponent("Render", "energy"));
         e.AddComponent(new LinearMovementComponent("Movement", -.1f, 0f));
         e.AddComponent(new NormalCollisionComponent("Collision", Allegiance.PLAYER));
+        e.getCollision().setPoints(5);
         return e;
     }
     

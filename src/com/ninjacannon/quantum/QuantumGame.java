@@ -51,5 +51,6 @@ public class QuantumGame extends StateBasedGame
     public void initStatesList(GameContainer gc) throws SlickException
     {
         this.addState(new MainMenuState(MAINMENUSTATE));
+        this.addState(new OvermapState(OVERMAPSTATE));
     }
 }

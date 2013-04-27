@@ -153,6 +153,7 @@ public class Player
             ship.setPosition(new Vector2f(0,0));
             ship.setAlive(true);
             EntityManager.manager.addEntity(ship);
+            EntityManager.manager.score -= 50;
             respawnTimer = 1200;
             ship.reset();
             shield.makeInvulnerable();

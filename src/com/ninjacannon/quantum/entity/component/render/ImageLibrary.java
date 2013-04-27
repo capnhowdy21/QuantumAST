@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
+import org.newdawn.slick.SpriteSheetFont;
 
 /**
  * @author Dan Cannon
@@ -13,6 +14,8 @@ public final class ImageLibrary{
     
     private static ImageLibrary _ImageLibrary;
     private HashMap images;
+    public SpriteSheetFont small = null;
+    public SpriteSheetFont large = null;
     
     private ImageLibrary(){
         images = new HashMap();
@@ -95,9 +98,13 @@ public final class ImageLibrary{
         loadSubImage("enemies", 129, 5, 57, 56, "titan");
         loadSubImage("enemies", 58, 39, 46, 20, "shooter");
         loadSpriteSheet("shield", "images/shield.png", 64, 64);
+        loadSpriteSheet("levels", "images/levels.jpg", 256, 256);
         loadSpriteSheet("explosion", "images/explosion.png", 64, 64);
         loadSpriteSheet("mine", "images/mine.png", 16, 16);
-        loadSpriteSheet("font", "images/font.png", 8, 8);
+        loadSpriteSheet("smallfont", "images/font.png", 8, 8);
+        loadSpriteSheet("largefont", "images/font3.png", 16, 16);
         loadSpriteSheet("cloak", "images/cloak.png", 32, 32);
+        small = new SpriteSheetFont(ImageLibrary.getInstance().getSheet("smallfont"), ' ');
+        large = new SpriteSheetFont(ImageLibrary.getInstance().getSheet("largefont"), ' ');
     }
 }

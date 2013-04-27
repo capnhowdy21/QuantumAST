@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<wave delay="6000">
+	<cloak x="1280" y="128" dx="-.15" dy="0"/>
+        <cloak x="1024" y="256" dx="-.15" dy="0"/>
+        <titan x="1024" y="384" dx="-.1" dy="0"/>
+	<cloak x="1024" y="512" dx="-.15" dy="0"/>
+        <cloak x="1280" y="640" dx="-.15" dy="0"/>
+</wave>
