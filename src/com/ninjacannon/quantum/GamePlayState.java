@@ -69,6 +69,8 @@ public class GamePlayState extends BasicGameState
             throws SlickException
     {
         background.render(gc, sbg, g);
+        gc.getDefaultFont().drawString(900, 15, 
+            "Score:" + String.valueOf(EntityManager.manager.score));
         switch(GAME_STATE){
             case GAME:
                 EntityManager.manager.render(gc, sbg, g);
@@ -88,8 +90,6 @@ public class GamePlayState extends BasicGameState
                 g.fillRect(50, 736, 200 * player.getEnergy(), 5);
                 g.setColor(Color.cyan);
                 g.fillRect(50, 750, 200 * player.getShields(), 5);
-                gc.getDefaultFont().drawString(900, 15, 
-                        "Score:" + String.valueOf(EntityManager.manager.score));
                 break;
             case LEAVE:
                 break;
